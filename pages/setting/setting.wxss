@@ -1,0 +1,12 @@
+
+
+.row{
+    padding: 40rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    border-bottom: 1rpx solid #F5F5F5;
+  }
+  

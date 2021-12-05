@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "编辑信息",
+  "usingComponents": {
+    "l-avatar":"/miniprogram_npm/lin-ui/avatar/index",
+    "l-popup":"/miniprogram_npm/lin-ui/popup/index"
+  }
+}

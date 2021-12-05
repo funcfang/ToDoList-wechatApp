@@ -1,0 +1,7 @@
+<view class="top-Area">
+    <view class="top-Area-inputView" style="background-color: {{isInputListName?'#ebebeb':'#f6f6f6'}};" ><input placeholder="清单标题" type="text" value="{{list.name}}" bindblur="input_listName"  bindfocus="tapInputListName"/></view>
+    <view>
+        <image class="top-Area-icon" src="/images/list/listDetail/team.png" mode="heightFix" bindtap="tapTeam"></image>
+        <image class="top-Area-icon" src="/images/list/listDetail/delete.png" mode="heightFix" bindtap="tapDeleteList"></image>
+    </view>
+</view>

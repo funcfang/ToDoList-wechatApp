@@ -1,0 +1,42 @@
+.tab-bar {
+    position: fixed;
+    width: 100%;
+    /* left: 0;
+    right: 0; */
+    bottom: 60rpx;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: env(safe-area-inset-bottom);
+    background-color: transparent;
+  }
+
+  .tab-bar-area{
+      display: flex;
+      width: 54%;
+      height: 55px;
+      background-color: white;
+      border-radius: 50%;
+  }
+  
+  
+  .tab-bar-item {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .tab-bar-item cover-image {
+    width: 26px;
+    height: 26px;
+  }
+  
+  .tab-bar-item cover-view {
+    font-size: 10px;
+    margin-top: 2rpx;
+  }
+  

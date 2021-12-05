@@ -1,0 +1,20 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+
+page{
+  background-color: #f6f6f6;
+}
+
+.hover-row{
+  opacity: 0.8;
+  background: #f7f7f7;
+  color: #333333;
+}

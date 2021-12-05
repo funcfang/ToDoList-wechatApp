@@ -1,0 +1,108 @@
+.row {
+    margin: 50rpx 30rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 32rpx;
+    color: #2c2c2c;
+
+    .row-leftpart {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        image {
+            width: 52rpx;
+            height: 52rpx;
+            margin-right: 20rpx;
+        }
+    }
+
+    .row-rightpart {
+        color: #8a8a8a;
+    }
+}
+
+.last-row {
+    padding-bottom: 50rpx;
+    border-bottom: 1rpx solid #ececec;
+}
+
+.collapse {
+    margin: 0rpx 30rpx 40rpx 30rpx;
+    font-size: 32rpx;
+    .collapse-rowTitle {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+        .collapse-rowTitle-amount {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            view{
+                margin-right: 20rpx;
+                font-size: 28rpx;
+                color: #8a8a8a;
+            }
+        }
+    }
+
+    .collapse-icon {
+        height: 30rpx;
+        width: 30rpx;
+    }
+
+    .collapse-list{
+        .collapse-list-row{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20rpx;
+        }
+    }
+}
+
+
+.creatPop{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 30rpx;
+    width: 580rpx;
+    padding: 40rpx ;
+    margin-bottom: 260rpx;
+    .creatPop-topRow{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 26rpx;
+        .creatPop-topRow-cancel{
+            color: #5478c7;
+        }
+        .creatPop-topRow-titleName{
+            font-size: 32rpx;
+            font-weight: bold;
+        }
+    }
+
+    .creatPop-inputRow{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 40rpx;
+        background-color: #f5f5f5;
+        border-radius: 20rpx;
+        height: 80rpx;
+        image{
+            margin: 0 20rpx;
+            width: 46rpx;
+            height: 46rpx;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+  "usingComponents": {
+    "l-slide-view":"/miniprogram_npm/lin-ui/slide-view/index",
+    "l-icon":"/miniprogram_npm/lin-ui/icon/index",
+    "l-button":"/miniprogram_npm/lin-ui/button/index",
+    "l-popup":"/miniprogram_npm/lin-ui/popup/index",
+    "l-arc-popup":"/miniprogram_npm/lin-ui/arc-popup/index",
+    "l-calendar":"/miniprogram_npm/lin-ui/calendar/index",
+    "l-radio-group":"/miniprogram_npm/lin-ui/radio-group/index",
+    "l-radio":"/miniprogram_npm/lin-ui/radio/index",
+    "l-collapse":"/miniprogram_npm/lin-ui/collapse/index",
+    "l-collapse-item":"/miniprogram_npm/lin-ui/collapse-item/index",
+    "l-toast":"/miniprogram_npm/lin-ui/toast/index"
+  },
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+}

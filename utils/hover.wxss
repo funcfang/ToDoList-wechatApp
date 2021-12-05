@@ -1,0 +1,9 @@
+
+.hover {
+    opacity: 0.9;
+    background: #f7f7f7;
+}
+
+.hover-bindtapAll {
+    color: #686868;
+  }

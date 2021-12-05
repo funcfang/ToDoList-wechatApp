@@ -1,0 +1,24 @@
+.top-Area {
+  padding: 30rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 40rpx;
+  font-weight: bold;
+}
+.top-Area view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.top-Area .top-Area-inputView {
+  border-radius: 10rpx;
+  padding: 0 20rpx;
+  height: 80rpx;
+}
+.top-Area .top-Area-icon {
+  width: 50rpx;
+  height: 50rpx;
+  margin: 0 30rpx;
+}

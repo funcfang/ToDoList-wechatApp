@@ -1,0 +1,9 @@
+<view class="avatarRow" bindtap="changeAvatar">
+    <view>头像</view>
+    <l-avatar size="130" shape="square" src="{{user.avatar}}" />
+</view>
+
+<view class="nameRow">
+    <view>昵称</view>
+    <input type="text" placeholder="请输入昵称"  hold-keyboard="{{true}}" adjust-position="{{false}}" bindblur="inputName" value="{{user.username}}" style="text-align: right;" />
+</view>

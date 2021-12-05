@@ -1,0 +1,27 @@
+
+.buttonRow {
+    margin-top: 50rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .pp-bA-left {
+    margin-right: 40rpx;
+  }
+  
+  .pp-bA-right {
+    margin: 0rpx !important;
+    margin-left: 40rpx !important;
+    background: #3963bc;
+    border: 1rpx solid #396aff;
+    font-size: 28rpx;
+    width: 180rpx !important;
+    height: 72rpx !important;
+    border-radius: 10rpx;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }

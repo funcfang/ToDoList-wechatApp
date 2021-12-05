@@ -1,0 +1,9 @@
+<view class="row">
+    <view>完成提示音</view>
+    <switch id="audio" checked="{{user.is_click_sound}}" bindchange="onChange" color="#1296db" />
+</view>
+
+<view class="row">
+    <view>完成触感</view>
+    <switch id="touch" checked="{{user.is_click_heavy}}" bindchange="onChange" color="#1296db" />
+</view>

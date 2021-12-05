@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "l-avatar":"/miniprogram_npm/lin-ui/avatar/index"
+  }
+}

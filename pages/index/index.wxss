@@ -1,0 +1,28 @@
+.top-Area {
+  padding: 20rpx 30rpx 20rpx 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.top-Area .tA-icon {
+  width: 50rpx;
+  height: 50rpx;
+}
+.top-Area .tA-title {
+  font-size: 46rpx;
+  color: #2c2c2c;
+  font-weight: bold;
+}
+.top-Area .tA-date {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 6rpx;
+  font-size: 32rpx;
+}
+.top-Area .momentIcon {
+  margin-left: 24rpx;
+  width: 40rpx;
+  height: 40rpx;
+}

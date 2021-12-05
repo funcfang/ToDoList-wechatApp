@@ -1,0 +1,42 @@
+{
+    "setting": {},
+    "condition": {
+        "plugin": {
+            "list": []
+        },
+        "game": {
+            "list": []
+        },
+        "gamePlugin": {
+            "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "mine",
+                    "pathName": "pages/mine/mine",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "information",
+                    "pathName": "pages/information/information",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "list",
+                    "pathName": "pages/list/list",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "listDetail",
+                    "pathName": "pages/list/listDetail/listDetail",
+                    "query": "data={\"id\":4,\"CreatedAt\":\"2021-12-05T13:38:48+08:00\",\"name\":\"sss\",\"user_id\":1}",
+                    "scene": null
+                }
+            ]
+        }
+    }
+}

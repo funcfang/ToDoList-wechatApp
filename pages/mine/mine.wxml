@@ -1,0 +1,34 @@
+<navigator class="avatar"  open-type="navigate" url="../information/information">
+    <l-avatar class="avatar-row" shape="square" src="{{user.avatar}}" />
+    <view class="name">{{user.username}}</view>
+</navigator>
+
+<view class="finishRow">
+    <view class="finishRow-part">
+        <view>今日已完成</view>
+        <view class="finishRow-part-num">{{finish.today}}</view>
+    </view>
+    <view class="finishRow-part">
+        <view>累计已完成</view>
+        <view class="finishRow-part-num">{{finish.total}}</view>
+    </view>
+</view>
+
+<navigator class="row"  open-type="navigate" url="../about/about">
+    <view>关于</view>
+    <image mode="heightFix" src="/images/right.png"></image>
+</navigator>
+
+<view class="row">
+    <button open-type="feedback" class="feedback">
+        <view class="row-feedback">
+            <view>反馈</view>
+            <image mode="heightFix" src="/images/right.png"></image>
+        </view>
+    </button>
+</view>
+
+<navigator class="row"  open-type="navigate" url="../setting/setting">
+    <view>设置</view>
+    <image mode="heightFix" src="/images/right.png"></image>
+</navigator>
