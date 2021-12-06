@@ -1,8 +1,5 @@
 .top-Area {
-  padding: 30rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  margin: 30rpx;
   justify-content: space-between;
   font-size: 40rpx;
   font-weight: bold;
@@ -21,4 +18,101 @@
   width: 50rpx;
   height: 50rpx;
   margin: 0 30rpx;
+}
+.taskRow {
+  width: 690rpx;
+  margin: 7rpx 30rpx;
+  height: 120rpx;
+}
+.taskRow .taskRow-left {
+  background-color: white;
+  border-radius: 20rpx;
+  border: 1rpx solid #f0f0f0;
+  height: 120rpx;
+  padding: 0 20rpx;
+}
+.taskRow .taskRow-left .task-icon {
+  width: 80rpx;
+  height: 80rpx;
+}
+.taskRow .taskRow-left .task-icon2 {
+  width: 63rpx;
+  height: 63rpx;
+}
+.taskRow .taskRow-left .task-rightPart {
+  margin-left: 20rpx;
+  font-size: 32rpx;
+}
+.taskRow .taskRow-left .task-rightPart .task-rightPart-bottomRow {
+  color: #515151;
+  font-size: 28rpx;
+}
+.taskRow .taskRow-left .task-rightPart .task-rightPart-bottomRow image {
+  margin-left: -6rpx;
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 6rpx;
+}
+.taskRow .taskRow-right {
+  border-radius: 20rpx;
+  background-color: #f5222d;
+  border: 1rpx solid #f0f0f0;
+  width: 150rpx;
+  height: 120rpx;
+}
+.taskRow .taskRow-right image {
+  width: 40rpx;
+  height: 40rpx;
+  margin: auto 50rpx;
+}
+.addIcon {
+  position: fixed;
+  bottom: 80px;
+  right: 40px;
+}
+.addIcon image {
+  width: 100rpx;
+  height: 100rpx;
+}
+.teamPop {
+  background-color: white;
+  padding: 40rpx;
+  width: 500rpx;
+  border-radius: 20rpx;
+  text-align: center;
+}
+.teamPop .teamPop-topRow {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #2c2c2c;
+  margin-bottom: 70rpx;
+  position: relative;
+  /* 设置相对定位 */
+}
+.teamPop .teamPop-topRow view {
+  /* 绝对定位，4 个方向设置为 0 后，margin 设为 auto */
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.teamPop .teamPop-topRow .teamPop-topRow-button {
+  position: absolute;
+  right: 36rpx;
+  margin: auto 0;
+}
+.teamPop .teamPop-matePart {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.teamPop .teamPop-matePart .teamPop-matePart-part {
+  margin-top: 20rpx;
+  width: 120rpx;
+}
+.teamPop .teamPop-matePart .teamPop-matePart-part .teamPop-matePart-name {
+  font-size: 26rpx;
 }

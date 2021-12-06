@@ -87,6 +87,9 @@ function showToast(title, icon, duration, isMask) {
   })
 }
 
+
+// 唉 当时太年轻 ， 现在发现 new Date(date).toJSON(); 直接解决问题 , 但是时间为空则是 2000-12-31T16:00:00.000Z，到头来还是需要自己封装下
+
 //将时间转换成标准格式--time有时分，即年月日时分秒，2021-08-02 00:00
 // 2021-08-02 00:00 -> 2021-08-02T00:00:00.000+08:00
 function setTimeFormat(time) {
@@ -94,9 +97,29 @@ function setTimeFormat(time) {
 }
 
 // 将日期转换成标准格式 --time无时分，即年月日时分秒，2021-08-02 
-// 2021-08-02 -> 2021-08-02T00:00:00.000+08:00
+// 2021-08-02 -> 2001-01-01T23:59:59.000Z+08:00
 function setDateFormat(time) {
-  return time + "T00:00:00.000+08:00"
+  return time.substr(0, 10) + "T23:59:59.000Z"
+}
+
+// 已解决时区差8小时问题
+// 当前时间 = 包含时差的当前时间 + 时差时间，getTimezoneOffset() 获取时差（以分钟为单位），转为小时需要除以 60
+// 解决使用 moment.js 格式化本地时间戳时多出了 8 小时问题，这 8 小时是本地时间与格林威治标准时间 (GMT) 的时差
+function getNowDateFormat() {
+  var myDate = new Date(); //获取系统当前时间
+  myDate.setHours(date.getHours() + date.getTimezoneOffset() / 60)
+  let year = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
+  let month = myDate.getMonth() + 1; //获取当前月份(0-11,0代表1月)
+  let day = myDate.getDate(); //获取当前日(1-31)
+  let hour = myDate.getHours(); //获取当前小时数(0-23)
+  let min = myDate.getMinutes(); //获取当前分钟数(0-59)
+  month = month < 10 ? '0' + month : month
+  day = day < 10 ? '0' + day : day
+  hour = hour < 10 ? '0' + hour : hour
+  min = min < 10 ? '0' + min : min
+  let date = year + '-' + month + '-' + day + 'T' + hour + ':' + min + ':00.000Z'
+  console.log(date)
+  return date
 }
 
 // 时间的截取 
@@ -124,374 +147,11 @@ function changeDate(time) {
   return time
 }
 
-//通用的request请求,有显示loading和toast
-// const request_common = (url_name, method, data, show_name) => {
-//   return new Promise((resolve, reject) => {
-//     if (method === "GET") {
-//       wx.showNavigationBarLoading()
-//     } else {
-//       showLodaingIng(show_name + "中")
-//     }
-//     wx.request({
-//       url: getApp().globalData.url + url_name,
-//       data: data,
-//       method: method,
-//       header: {
-//         'X-APP':"MiniProgram",
-//         'content-type': "application/json; charset=utf-8",
-//         'token': wx.getStorageSync('token')
-//       },
-//       success(res) {
-//         wx.hideLoading()
-//         console.log(url_name + "返回 common", res)
-//         let statusCode = 200
-//         if (method === "DELETE"||method === "delete") {
-//           statusCode = 204
-//         }
-//         if (res.statusCode === statusCode) {
-//           if (method != "GET") {
-//             wx.showToast({
-//               title: show_name + "成功",
-//               duration: 1200,
-//               mask: true
-//             })
-//             setTimeout(function () {
-//               resolve(res)
-//             }, 1200)
-//           } else {
-//             resolve(res)
-//           }
-
-//         } else {
-//           console.log("fail ", res)
-//           showModalErrorAndMsg(show_name + "失败", res)
-//           reject(res)
-//         }
-//       },
-//       fail: function (error) {
-//         // 发生网络错误等情况触发
-//         console.log("请求失败 ", error)
-//         wx.hideLoading()
-//         showModalTowErrors(show_name + "失败")
-//         reject(error)
-//       },
-//       complete() {
-
-//         if (method === "GET") {
-//           wx.hideNavigationBarLoading()
-//         }
-//       }
-//     })
-//   })
-// }
-
-
-// //通用的request请求,有显示loading和toast
-// const request_common_noApi = (url_name, method, data, show_name) => {
-//   return new Promise((resolve, reject) => {
-//     if (method === "GET") {
-//       wx.showNavigationBarLoading()
-//     } else {
-//       showLodaingIng(show_name + "中")
-//     }
-//     wx.request({
-//       url: getApp().globalData.url_file + url_name,
-//       data: data,
-//       method: method,
-//       header: {
-//         'X-APP':"MiniProgram",
-//         'content-type': "application/json; charset=utf-8",
-//         'token': wx.getStorageSync('token')
-//       },
-//       success(res) {
-//         wx.hideLoading()
-//         console.log(url_name + "返回 common", res)
-//         let statusCode = 200
-//         if (method === "DELETE") {
-//           statusCode = 204
-//         }
-//         if (res.statusCode === statusCode) {
-//           if (method != "GET") {
-//             wx.showToast({
-//               title: show_name + "成功",
-//               duration: 1200,
-//               mask: true
-//             })
-//             setTimeout(function () {
-//               resolve(res)
-//             }, 1200)
-//           } else {
-//             resolve(res)
-//           }
-
-//         } else {
-//           console.log("fail ", res)
-//           showModalErrorAndMsg(show_name + "失败", res)
-//           reject(res)
-//         }
-//       },
-//       fail: function (error) {
-//         // 发生网络错误等情况触发
-//         console.log("请求失败 ", error)
-//         wx.hideLoading()
-//         showModalTowErrors(show_name + "失败")
-//         reject(error)
-//       },
-//       complete() {
-
-//         if (method === "GET") {
-//           wx.hideNavigationBarLoading()
-//         }
-//       }
-//     })
-//   })
-// }
-
-// //通用的request请求,无显示loading和toast，纯处理，没反馈提示
-// const request_common_noTip = (url_name, method, data, show_name) => {
-//   return new Promise((resolve, reject) => {
-//     wx.request({
-//       url: getApp().globalData.url + url_name,
-//       data: data,
-//       method: method,
-//       header: {
-//         'X-APP':"MiniProgram",
-//         'content-type': "application/json; charset=utf-8",
-//         'token': wx.getStorageSync('token')
-//       },
-//       success(res) {
-//         wx.hideLoading()
-//         console.log(url_name + "返回 学院公告内重做", res)
-//         let statusCode = 200
-//         if (method === "DELETE"||method === "delete") {
-//           statusCode = 204
-//         }
-//         if (res.statusCode == statusCode) {
-//           resolve(res)
-//         } else {
-//           console.log("fail ", res)
-//           showModalErrorAndMsg(show_name + "失败", res)
-//           reject(res)
-//         }
-//       },
-//       fail: function (error) {
-//         // 发生网络错误等情况触发
-//         console.log("请求失败 ", error)
-//         wx.hideLoading()
-//         showModalTowErrors(show_name + "失败")
-//         reject(error)
-//       }
-//     })
-//   })
-// }
-
-// //通用的GET请求，没有显示loading，
-// const request_getCommon = (url_name, data) => {
-//   return new Promise((resolve, reject) => {
-//     wx.showNavigationBarLoading()
-//     wx.request({
-//       url: getApp().globalData.url + url_name,
-//       method: "GET",
-//       data: data,
-//       header: {
-//         'X-APP':"MiniProgram",
-//         'content-type': "application/json; charset=utf-8",
-//         'token': wx.getStorageSync('token')
-//       },
-//       success(res) {
-//         console.log(url_name + "返回  getCommon", res)
-//         if (res.statusCode == 200) {
-//           resolve(res)
-//         } else {
-//           console.log('res.statusCode ', res.statusCode)
-//           if (res.statusCode == 502) {
-//             showModalErrorAndMsg("系统错误", "服务器累了，让服务器歇会吧")
-//             reject(res)
-//           }
-//           showModalErrorAndMsg("加载失败", res)
-//           reject(res)
-//         }
-//       },
-//       fail: function (error) {
-//         // 发生网络错误等情况触发
-//         showModalTowErrors("加载失败")
-//         reject(error)
-//       },
-//       complete() {
-//         wx.hideNavigationBarLoading()
-//       }
-//     })
-//   })
-// }
-
-// //获取列表请求 - 可能会设计到分页加载、模糊搜索等的请求，data中需自己定义好~
-// const request_getList = (url_name, data) => {
-//   return new Promise((resolve, reject) => {
-//     wx.showNavigationBarLoading()
-//     wx.request({
-//       url: getApp().globalData.url + url_name,
-//       data: data,
-//       method: "GET",
-//       header: {
-//         'X-APP':"MiniProgram",
-//         'content-type': "application/json; charset=utf-8",
-//         'token': wx.getStorageSync('token')
-//       },
-//       success(res) {
-//         wx.hideLoading()
-//         console.log(url_name + " 列表后台返回", res)
-//         if (res.statusCode == 200) {
-//           resolve(res)
-//         } else {
-//           showModalErrorAndMsg("加载失败", res)
-//           reject(res)
-//         }
-//       },
-//       fail: function (error) {
-//         // 发生网络错误等情况触发
-//         console.log("请求失败")
-//         wx.hideLoading()
-//         showModalTowErrors("加载失败")
-//         reject(error)
-//       },
-//       complete() {
-//         wx.hideNavigationBarLoading()
-//       }
-//     })
-//   })
-// }
-
-// //获取列表, 配置文件头无api
-// const request_getList_noApi = (url_name, data) => {
-//   return new Promise((resolve, reject) => {
-//     wx.showNavigationBarLoading()
-//     wx.request({
-//       url: getApp().globalData.url_file + url_name,
-//       data: data,
-//       method: "GET",
-//       header: {
-//         'X-APP':"MiniProgram",
-//         'content-type': "application/json; charset=utf-8",
-//         'token': wx.getStorageSync('token')
-//       },
-//       success(res) {
-//         console.log("列表后台返回", res)
-//         if (res.statusCode == 200) {
-//           resolve(res)
-//         } else {
-//           if (res.statusCode == 502) {
-//             showModalErrorAndMsg("系统错误", "服务器累了，让服务器歇会吧")
-//             reject(res)
-//           }
-//           showModalErrorAndMsg("加载失败", res)
-//           reject(res)
-//         }
-//       },
-//       fail: function (error) {
-//         // 发生网络错误等情况触发
-//         console.log("请求失败")
-//         showModalTowErrors("加载失败")
-//         reject(error)
-//       },
-//       complete() {
-//         wx.hideNavigationBarLoading()
-//       }
-//     })
-//   })
-// }
-
-// //通用的上传文件请求, 一次只能一个文件
-// const upload_file = (url_name, data, show_name) => {
-//   return new Promise((resolve, reject) => {
-//     showLodaingIng(show_name + "中")
-//     wx.uploadFile({
-//       url: getApp().globalData.url + url_name,
-//       filePath: data.path,
-//       fileName: data.name,
-//       name: 'file',
-//       formData:{
-//         fileName:data.name
-//       },
-//       header: {
-//         'X-APP':"MiniProgram",
-//         'token': wx.getStorageSync('token'),
-//         "Content-Type": "multipart/form-data",
-
-//       },
-//       success(res) {
-//         console.log("文件返回", res)
-//         if (res.statusCode == 200) {
-//           // wx.hideLoading()
-//           resolve(res)
-//         } else {
-//           wx.hideLoading()
-//           showModalErrorAndMsg(show_name + "失败", res)
-//           reject(res)
-//         }
-//       },
-//       fail: function (error) {
-//         wx.hideLoading()
-//         showModalTowErrors(show_name + "失败")
-//         reject(error)
-//       },
-//     })
-//   })
-// }
-
-// //多文件上传
-// const FormData = require('./formData.js')
-// const upload_files = (filesList, url) => {
-//   return new Promise((resolve, reject) => {
-//     let formData = new FormData(); //封装fromdata,多文件上传
-//     for (let i = 0; i < filesList.length; i++) {
-//       console.log(i, filesList[i])
-//       formData.appendFile('file[]', filesList[i].path, filesList[i].name)
-//     }
-//     let data = formData.getData();
-//     wx.request({
-//       url: getApp().globalData.url + url,
-//       method: "POST",
-//       header: {
-//         'X-APP':"MiniProgram",
-//         'content-type': data.contentType,
-//         'token': wx.getStorageSync('token')
-//       },
-//       data: data.buffer,
-//       success(res) {
-//         console.log("success ", res)
-//         resolve(res)
-//       },
-//       fail(res) {
-//         wx.hideLoading()
-//         showModalErrorAndMsg(show_name + "失败", res)
-//         reject(res)
-//       },
-//       complete(res) {
-
-//       }
-//     })
-//   })
-// }
-
-// //用于简历详情的获奖附件处理，将获奖日期转换为 年-月 格式
-// function resume_attachments(data) {
-//   let list = []
-//   for (let i = 0; i < data.length; i++) {
-//     let date = new Date(data[i].date)
-//     let year = date.getFullYear()
-//     let month = date.getMonth() + 1
-//     date = year + "年" + month + "月"
-//     data[i].date = date
-//     list.push(data[i])
-//   }
-//   return list
-// }
-
 //预览文件
 function readFile(file_url) {
   showLodaingIng("加载中")
   wx.downloadFile({
-    url: getApp().globalData.url_file + file_url,
+    url: getApp().globalData.API_FILE + file_url,
     method: "GET",
     header: {
       'X-APP': "MiniProgram",
@@ -606,6 +266,36 @@ const chooseFile = (amount) => {
   })
 }
 
+const getUserInfo = () => {
+  return new Promise((resolve, reject) => {
+    console.log('user_api', user_api,api)
+    wx.login({
+      success: res => {
+        if (res.code) {
+          user_api.login({
+            "code": res.code
+          }).then(e => {
+            e.user.username = e.user.username === "" ? "💻" : e.user.username
+            e.user.avatar = e.user.avatar === "" ? "/images/mine/avatar.png" : getApp().globalData.API_FILE + e.user.avatar
+            wx.setStorageSync('user', e.user)
+            wx.setStorageSync('token', e.data.token)
+            getApp().globalData.user = e.user
+            resolve(e)
+          })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+          reject(res)
+        }
+      },
+      fail: res => {
+        util.showModalErrorAndMsg("错误", "网络超时")
+        reject(res)
+      }
+    })
+  })
+
+}
+
 
 module.exports = {
   formatTime,
@@ -614,20 +304,13 @@ module.exports = {
   showLodaingIng,
   setTimeFormat,
   setDateFormat,
-  // request_getList,
-  // request_common,
-  // upload_file,
   readFile,
-  // resume_attachments,
-  // request_getCommon,
-  // request_getList_noApi,
   isRealNum, //是否纯数字
   substrTime,
   previewImg_single, //预览单个图片
-  // upload_files, //多文件上传
-  // request_common_noTip,
   isFullScreen,
   chooseFile,
   showToast,
-  // request_common_noApi
+  getNowDateFormat,
+  getUserInfo
 }

@@ -18,20 +18,20 @@ class Curd {
         this.plural = plural ?? this.baseUrl + 's'
     }
 
-    _get_list(params,isShowModal = false) {
-        return request(this.plural, "get", params,isShowModal)
+    _get_list(params, isShowModal = false) {
+        return request(this.plural, "get", params, isShowModal)
     }
 
-    _get(id,isShowModal = false) {
-        return request(this.baseUrl + (id ? '/' + id : ''), "get","",isShowModal)
+    _get(id, isShowModal = false) {
+        return request(this.baseUrl + (id ? '/' + id : ''), "get", "", isShowModal)
     }
 
     _save(id = null, data, isShowModal = false) {
         return request(this.baseUrl + (id ? '/' + id : ''), "post", data, isShowModal)
     }
 
-    _delete(id) {
-        return request(this.baseUrl + '/' + id, "delete")
+    _delete(id, isShowModal = false) {
+        return request(this.baseUrl + '/' + id, "delete", "", isShowModal)
     }
 
     _upload(id, filePath, fileName) {

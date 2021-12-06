@@ -3,6 +3,7 @@
         "pages/index/index",
         "pages/list/list",
         "pages/list/listDetail/listDetail",
+        "pages/task/task",
         "pages/mine/mine",
         "pages/information/information",
         "pages/setting/setting",

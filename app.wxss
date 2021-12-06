@@ -7,14 +7,31 @@
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box;
-} 
+}
 
-page{
+page {
   background-color: #f6f6f6;
 }
 
-.hover-row{
+.hover {
+  opacity: 0.9;
+}
+
+.hover-row {
   opacity: 0.8;
   background: #f7f7f7;
   color: #333333;
+}
+
+.align-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }

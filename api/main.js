@@ -77,7 +77,9 @@ const upload_file = (url, data, show_name = '上传') => {
             filePath: data.path,
             name: 'file',
             formData: {
-                fileName: data.name
+                'filename': data.name,
+                'name':data.name,
+                'Filename': data.name,
             },
             header: {
                 'token': wx.getStorageSync('token'),

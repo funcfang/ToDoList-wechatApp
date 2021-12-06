@@ -33,7 +33,13 @@
                 {
                     "name": "listDetail",
                     "pathName": "pages/list/listDetail/listDetail",
-                    "query": "data={\"id\":4,\"CreatedAt\":\"2021-12-05T13:38:48+08:00\",\"name\":\"sss\",\"user_id\":1}",
+                    "query": "data={\"id\":1,\"CreatedAt\":\"2021-12-05T13:38:48+08:00\",\"name\":\"sss\",\"user_id\":1}",
+                    "scene": null
+                },
+                {
+                    "name": "task",
+                    "pathName": "pages/task/task",
+                    "query": "list_id=4",
                     "scene": null
                 }
             ]

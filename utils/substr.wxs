@@ -3,53 +3,41 @@
    WXS 中不能调用 javascript 中定义的函数或者变量
 */
 
-/* 
-    时间的截取 
-    通用 公告列表 公告详情
-    学生端 请教列表
-    教师端 请教列表、拜访列表
-    eg: 2021-08-07T11:48:42.655+08:00  -> 2021-08-07 11:48
-*/
+//eg: 2021-08-07T11:48:42.655+08:00  -> 2021-08-07 11:48   害现在不需要了，现在自己写前后端跑就是爽
 var timeSub = function (time) {
   return time.substring(0, 10) + " " + time.substring(11, 16)
 }
 
 var timeSub_noTime = function (time) {
-  return time.substring(0, 10) 
+  return time.substring(0, 10)
 }
 
-var timeSub_yearMonth = function(time){
-  var year = time.substring(0,4)
-  var month = time.substring(5,7)
+var timeSub_yearMonth = function (time) {
+  var year = time.substring(0, 4)
+  var month = time.substring(5, 7)
   var date = year + "年" + month + "月"
   return date
 }
 
-/* 
-    文件名字的截取 
-    通用 公告详情
-    学院端 公告详情
-    eg: upload/notices/59/20210612会议纪要.docx  -> 20210612会议纪要.docx
-*/
-var fileNameSub = function (fileName) {
-  var idx = fileName.indexOf("/",15);
-  return fileName.substring(idx + 1);
+var timeSub_MonthDay = function (time) {
+  var month = time.substring(5, 7)
+  var day = time.substring(8, 10)
+  if (month[0] == '0') month = month[1]
+  if (day[0] == '0') day = day[1]
+  var date = month + "月" + day + "日"
+  return date
 }
 
-/* 
-//本来想用在简历详情的获奖附件改成年月，但 wxs不能用new Date()
-// var monthAndDay = function(e) {
-//   var date = new Date(e)     
-//   var year = date.getFullYear()
-//   var month = date.getMonth() + 1
-//   return  year + "年" + month + "月"
-// }
-*/
+//eg: upload/notices/59/20210612会议纪要.docx  -> 20210612会议纪要.docx
+var fileNameSub = function (fileName) {
+  var idx = fileName.indexOf("/", 15);
+  return fileName.substring(idx + 1);
+}
 
 module.exports = {
   timeSub: timeSub,
   fileNameSub: fileNameSub,
-  timeSub_noTime:timeSub_noTime,
-  timeSub_yearMonth:timeSub_yearMonth
-  // monthAndDay: monthAndDay
+  timeSub_noTime: timeSub_noTime,
+  timeSub_yearMonth: timeSub_yearMonth,
+  timeSub_MonthDay: timeSub_MonthDay,
 }

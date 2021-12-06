@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "calendar":"/miniprogram_npm/calendar_v1/index",
+    "l-popup":"/miniprogram_npm/lin-ui/popup/index",
+    "l-album":"/miniprogram_npm/lin-ui/album/index"
+   },
+  "navigationBarTitleText": "任务编辑"
+}

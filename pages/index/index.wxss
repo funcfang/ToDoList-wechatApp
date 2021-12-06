@@ -26,3 +26,11 @@
   width: 40rpx;
   height: 40rpx;
 }
+.addIcon {
+  position: fixed;
+  right: 50rpx;
+}
+.addIcon image {
+  width: 100rpx;
+  height: 100rpx;
+}

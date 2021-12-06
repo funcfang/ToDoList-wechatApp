@@ -47,7 +47,7 @@
         "useCompilerPlugins": false
     },
     "compileType": "miniprogram",
-    "libVersion": "2.19.4",
+    "libVersion": "2.21.0",
     "appid": "wx76ee2212e8ab7067",
     "projectname": "ToDo%E4%BB%BB%E5%8A%A1%E6%B8%85%E5%8D%95",
     "debugOptions": {

@@ -1,0 +1,74 @@
+<!-- 引用 WXS 模块 substr.wxs -->
+<wxs src="/utils/substr.wxs" module="substr" />
+
+
+<view class="topArea  align-center">
+    <view class="topArea-left align-center">
+        <!-- <image class="topArea-left-icon" mode="heightFix" src="/images/list/listDetail/circle.png"></image> -->
+        <image wx:if="{{!task.is_finished}}" class="topArea-left-icon" mode="heightFix" src="/images/list/listDetail/circle.png" bindtap="tapFinish" data-item="{{task}}"></image>
+        <image wx:else class="topArea-left-icon2" mode="heightFix" src="/images/finish.png" bindtap="tapCancel" data-item="{{task}}"></image>
+        <view class="top-Area-inputView align-center" style="background-color: {{isInputName?'#ebebeb':'#f6f6f6'}};">
+            <input placeholder="任务名称" type="text" value="{{task.name}}" bindblur="input_name" bindfocus="tapInputName" style="width: 400rpx;" />
+        </view>
+    </view>
+    <view wx:if="{{!task.id}}">
+        <image wx:if="{{isSubmit}}" class="top-Area-icon" src="/images/task/submit.png" mode="heightFix" bindtap="tapSubmit">
+        </image>
+    </view>
+</view>
+
+<view class="row align-center" bindtap="tapChooseEndTime">
+    <image class="icon" mode="heightFix" src="/images/task/calendar.png"></image>
+    <view>{{task.end_date?task.end_date[0]=='0'?'截止日期':substr.timeSub_MonthDay(task.end_date)+" "+weekArray[task.week]:'截止日期'}}</view>
+</view>
+
+<view class="row align-center" bindtap="tapAddFile">
+    <image class="icon" mode="heightFix" src="/images/task/file.png"></image>
+    <view>添加文件</view>
+</view>
+
+<block>
+    <view wx:for="{{task.files}}" wx:key="id" class="file-row" bindtap="readFile" data-path="{{item.path}}">
+        <view>文件{{index+1}}</view>
+    </view>
+</block>
+
+<view class="final-row align-center" bindtap="tapPhoto">
+    <image class="icon" mode="heightFix" src="/images/task/photo.png"></image>
+    <view>添加图片</view>
+</view>
+
+
+<view class="file-row">
+    <l-album urls='{{task.photos}}' key='path'></l-album>
+</view>
+
+<view class="textarea">
+    <textarea style="width: 100%;" name="content" id="" cols="30" rows="10" placeholder="描述" value="{{task.description}}" maxlength="-1" bindblur="input_description" bindconfirm="input_description"></textarea>
+</view>
+
+
+
+
+
+<view class="bottom-fixed" wx:if="{{task.name}}">
+    <view class="bottom-fixed-row align-center">
+        <view></view>
+        <view wx:if="{{task.finished_date[0]!='0'}}">完成于 {{substr.timeSub_MonthDay(task.finished_date)}}</view>
+        <view wx:else>创建于 {{substr.timeSub_MonthDay(task.created_at)}}</view>
+        <image bindtap="tapDelete" mode="heightFix" src="/images/task/delete.png"></image>
+    </view>
+</view>
+
+
+<l-popup show="{{isShowCalendar}}">
+    <view class="popup">
+        <view class="pp-calendar">
+            <calendar calendarConfig="{{calendarConfig}}" bind:afterTapDay="afterTapDay" />
+        </view>
+        <view class="pp-row center">
+            <view class="pp-cancel" bindtap="cancel">取消</view>
+            <view bindtap="confirmDate">确定</view>
+        </view>
+    </view>
+</l-popup>

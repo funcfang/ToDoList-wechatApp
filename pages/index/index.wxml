@@ -277,3 +277,9 @@
 
 <!-- 轻提示 -->
 <l-toast offsetY="-20" show="{{isShowToast}}" title="今天准备做啥呀？" />
+
+
+
+<view class="addIcon" hover-class="hover" style="bottom:{{isFullScreen?'130rpx':'66rpx'}}" bindtap="tapAdd">
+    <image mode="heightFix" src="/images/list/listDetail/add.svg"></image>
+</view>

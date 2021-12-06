@@ -2,9 +2,12 @@ import {
     user_api
 } from '../../api/common/index'
 
+const util = require("../../utils/util")
+
 Page({
 
     data: {
+        isFullScreen: false,
         now_date: "",
         momentIcon_show: "morning"
     },
@@ -13,6 +16,14 @@ Page({
         var that = this
         that.getUserInfo()
         that.updateTodayMoment()
+        util.isFullScreen().then(e => {
+            if (e) {
+                that.setData({
+                    isFullScreen: true
+                })
+                getApp().globalData.isFullScreen = true
+            }
+        })
     },
 
     onReady: function () {
@@ -40,10 +51,14 @@ Page({
                         wx.setStorageSync('user', e.user)
                         wx.setStorageSync('token', e.data.token)
                         getApp().globalData.user = e.user
+
                     })
                 } else {
                     console.log('登录失败！' + res.errMsg)
                 }
+            },
+            fail: res => {
+                util.showModalErrorAndMsg("错误", "网络超时")
             }
         })
     },
@@ -52,7 +67,7 @@ Page({
     //更新当前时间
     updateTodayMoment() {
         var that = this
-        let weekArray = ['周日', "周一", "周二", "周三", "周四", "周五", "周六", ]
+        let weekArray = getApp().globalData.weekArray
         let now_date = (new Date().getMonth() + 1) + "月" + new Date().getDate() + "日"
         let now_week = new Date().getDay()
         now_date = now_date + " " + weekArray[now_week]
