@@ -6,11 +6,11 @@
 <view class="finishRow">
     <view class="finishRow-part">
         <view>今日已完成</view>
-        <view class="finishRow-part-num">{{finish.today}}</view>
+        <view class="finishRow-part-num">{{taskStatus.unfinished_task_amount}}</view>
     </view>
     <view class="finishRow-part">
         <view>累计已完成</view>
-        <view class="finishRow-part-num">{{finish.total}}</view>
+        <view class="finishRow-part-num">{{taskStatus.finished_task_amount}}</view>
     </view>
 </view>
 

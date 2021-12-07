@@ -1,0 +1,66 @@
+<!-- 引用 WXS 模块 substr.wxs -->
+<wxs src="/utils/substr.wxs" module="substr" />
+
+<block wx:for="{{unfinishedTasks}}" wx:key="id">
+    <view class="taskRow">
+        <l-slide-view height="120" width="690" slide-width="150" close="{{isCloseSlider}}">
+            <view slot="left" class="taskRow-left align-center">
+                <image wx:if="{{!item.is_finished}}" class="task-icon" mode="heightFix" src="/images/list/listDetail/circle.png" bindtap="tapFinish" data-item="{{item}}"></image>
+                <image wx:else class="task-icon2" mode="heightFix" src="/images/finish.png" bindtap="tapCancel" data-item="{{item}}"></image>
+                <view class="task-rightPart" bindtap="tapTask" data-item="{{item}}">
+                    <view>{{item.name}}</view>
+                    <view class="task-rightPart-bottomRow  align-center">
+                        <!-- <view wx:if="{{item.end_date[0]!='0'}}" class="align-center" style="margin-right: 26rpx;"> -->
+                        <image wx:if="{{item.end_date[0]!='0'}}" mode="heightFix" src="/images/list/listDetail/calendar.png"></image>
+                        <view wx:if="{{item.end_date[0]!='0'}}" style="margin-right: 26rpx;">{{substr.timeSub_MonthDay(item.end_date)+" "+weekArray[item.week]}}</view>
+                        <!-- </view> -->
+                        <image wx:if="{{isAllTask&&item.list.name}}" mode="heightFix" src="/images/list/listDetail/type.png"></image>
+                        <view wx:if="{{isAllTask&&item.list.name}}">{{item.list.name}}</view>
+                    </view>
+                </view>
+            </view>
+            <view slot="right" class="taskRow-right center" bindtap="tapDeleteTask" id="{{item.id}}">
+                <image mode="heightFix" src="/images/list/listDetail/delete_row.png"></image>
+            </view>
+        </l-slide-view>
+    </view>
+</block>
+
+
+<view class="collapse">
+    <l-collapse id="finished" bind:linexpand="tap_collapse" bind:linfold="tap_collapse">
+        <l-collapse-item customTitle="{{true}}">
+            <view class="collapse-rowTitle align-center" slot="title">
+                <!-- 有空改成动画，现在对动画不了解 -->
+                <image wx:if="{{collapse.finished_expand}}" class="collapse-icon" src="/images/down_0.png" mode="heightFix"></image>
+                <image wx:if="{{!collapse.finished_expand}}" class="collapse-icon" src="/images/right_0.png" mode="heightFix"></image>
+                <view class="haveFinishTitle">已完成{{finishTasks.length}}</view>
+            </view>
+
+            <block wx:for="{{finishedTasks}}" wx:key="id">
+                <view class="taskRow">
+                    <l-slide-view height="120" width="690" slide-width="150" close="{{isCloseSlider}}">
+                        <view slot="left" class="taskRow-left align-center">
+                            <image wx:if="{{!item.is_finished}}" class="task-icon" mode="heightFix" src="/images/list/listDetail/circle.png" bindtap="tapFinish" data-item="{{item}}"></image>
+                            <image wx:else class="task-icon2" mode="heightFix" src="/images/finish.png" bindtap="tapCancel" data-item="{{item}}"></image>
+                            <view class="task-rightPart" bindtap="tapTask" data-item="{{item}}">
+                                <view>{{item.name}}</view>
+                                <view class="task-rightPart-bottomRow  align-center">
+                                    <!-- <view wx:if="{{item.end_date[0]!='0'}}" class="align-center" style="margin-right: 26rpx;"> -->
+                                    <image wx:if="{{item.end_date[0]!='0'}}" mode="heightFix" src="/images/list/listDetail/calendar.png"></image>
+                                    <view wx:if="{{item.end_date[0]!='0'}}" style="margin-right: 26rpx;">{{substr.timeSub_MonthDay(item.end_date)+" "+weekArray[item.week]}}</view>
+                                    <!-- </view> -->
+                                    <image wx:if="{{isAllTask&&item.list.name}}" mode="heightFix" src="/images/list/listDetail/type.png"></image>
+                                    <view wx:if="{{isAllTask&&item.list.name}}">{{item.list.name}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view slot="right" class="taskRow-right center" bindtap="tapDeleteTask" id="{{item.id}}">
+                            <image mode="heightFix" src="/images/list/listDetail/delete_row.png"></image>
+                        </view>
+                    </l-slide-view>
+                </view>
+            </block>
+        </l-collapse-item>
+    </l-collapse>
+</view>

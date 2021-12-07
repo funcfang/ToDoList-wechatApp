@@ -1,50 +1,32 @@
 <view class="top-Area  align-center">
     <view class="top-Area-inputView" style="background-color: {{isInputListName?'#ebebeb':'#f6f6f6'}};"><input disabled="{{list.user_id!=user.id}}" placeholder="清单标题" type="text" value="{{list.name}}" bindblur="input_listName" bindfocus="tapInputListName" /></view>
     <view>
-        <image class="top-Area-icon" src="/images/list/listDetail/team.png" mode="heightFix" bindtap="tapTeam"></image>
-        <image  wx:if="{{list.user_id===user.id}}" class="top-Area-icon" src="/images/list/listDetail/delete.png" mode="heightFix" bindtap="tapDeleteList"></image>
+        <image class="top-Area-icon" src="/images/list/listDetail/team.png" mode="heightFix" bindtap="tapMembers"></image>
+        <image wx:if="{{list.user_id===user.id}}" class="top-Area-icon" src="/images/list/listDetail/delete.png" mode="heightFix" bindtap="tapDeleteList"></image>
     </view>
 </view>
 
-<!-- 引用 WXS 模块 substr.wxs -->
-<wxs src="/utils/substr.wxs" module="substr" />
 
-<block wx:for="{{tasks}}" wx:key="id">
-    <view class="taskRow">
-        <l-slide-view height="120" width="690" slide-width="150" close="{{isCloseSlider}}">
-            <view slot="left" class="taskRow-left align-center">
-                <image wx:if="{{!item.is_finished}}" class="task-icon" mode="heightFix" src="/images/list/listDetail/circle.png" bindtap="tapFinish" data-item="{{item}}"></image>
-                <image wx:else class="task-icon2" mode="heightFix" src="/images/finish.png" bindtap="tapCancel" data-item="{{item}}"></image>
-                <view class="task-rightPart" bindtap="tapTask" data-item="{{item}}">
-                    <view>{{item.name}}</view>
-                    <view class="task-rightPart-bottomRow  align-center" wx:if="{{item.end_date[0]!='0'}}">
-                        <image mode="heightFix" src="/images/list/listDetail/calendar.png"></image>
-                        <view>{{substr.timeSub_MonthDay(item.end_date)+" "+weekArray[item.week]}}</view>
-                    </view>
-                </view>
-
-            </view>
-            <view slot="right" class="taskRow-right center" bindtap="tapDeleteTask" id="{{item.id}}">
-                <image mode="heightFix" src="/images/list/listDetail/delete_row.png"></image>
-            </view>
-        </l-slide-view>
-    </view>
-</block>
-
+<taskList unfinishedTasks="{{unfinishedTasks}}" finishedTasks="{{finishedTasks}}"  api="{{Task_api}}" setting="{{setting}}" bindgetTaskList="getTaskList"></taskList>
 
 <!-- 小组弹出窗 -->
 <l-popup show="{{isShowTeamPop}}" content-align="center" bind:lintap="tapBackground">
     <view class="teamPop">
         <view class="teamPop-topRow">
+            <view style="display: block;">
+                <span>小组ID{{list.id}}</span>
+                <span>创建人ID{{list.user_id}}</span>
+            </view>
             <view>小组成员</view>
             <l-button wx:if="{{list.user_id===user.id}}" special="{{true}}" open-type="share" class="teamPop-topRow-button">
-                <l-icon name="share" size="36" />
+                <!-- <l-icon name="share" size="30" /> -->
+                <view>邀请</view>
             </l-button>
         </view>
         <view class="teamPop-matePart">
-            <view class="teamPop-matePart-part" wx:for="{{teamMates}}" wx:key="id">
-                <l-avatar size="100" src="{{API_FILE+item.avatar}}" />
-                <view class="teamPop-matePart-name">{{item.name}}</view>
+            <view class="teamPop-matePart-part" wx:for="{{teamMembers}}" wx:key="id">
+                <l-avatar size="100" src="{{item.user.avatar==''?'/images/mine/avatar.png':API_FILE+item.user.avatar}}" />
+                <view class="teamPop-matePart-name">{{item.user.username==''?'😎':item.user.username}}</view>
             </view>
         </view>
     </view>

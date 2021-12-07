@@ -1,6 +1,6 @@
 const util = require("../../utils/util")
 import {
-    task_api
+    task_api,
 } from '../../api/common/index'
 
 var CHOOSE_END_DATE
@@ -21,19 +21,23 @@ Page({
             disableMode: { // 禁用某一天之前/之后的所有日期
                 type: 'before', // [‘before’, 'after']
             },
-        }
+        },
+        setting: getApp().globalData.setting,
     },
 
 
     onLoad: function (options) {
         var that = this
+        that.data.setting = getApp().globalData.setting
         if (options.list_id) {
             that.data.task.list_id = options.list_id * 1
         } else {
             let task = JSON.parse(options.task)
-            task.photos.map((item, index) => {
-                task.photos[index].path = getApp().globalData.API_FILE + item.path
-            })
+            if (task.photos) {
+                task.photos.map((item, index) => {
+                    task.photos[index].path = getApp().globalData.API_FILE + item.path
+                })
+            }
             that.setData({
                 task
             })
@@ -43,7 +47,12 @@ Page({
         })
     },
 
+    //为什么要多一个input，因为初始创建提交时可能blur不到
     input_description(e) {
+        this.data.task.description = e.detail.value
+    },
+
+    blur_description(e) {
         this.data.task.description = e.detail.value
         if (this.data.task.id) {
             this.updateTask()
@@ -51,11 +60,23 @@ Page({
     },
 
     tapSubmit() {
+        if(this.data.task.end_date){
+            this.data.task.end_date = util.setDateFormat(this.data.task.end_date)
+        }
         task_api.save("", this.data.task).then(e => {
             wx.navigateBack({
                 delta: 1,
             })
         })
+    },
+
+    updateTask() {
+        var that = this
+        // that.data.task.end_date = new Date(that.data.task.end_date).toJSON();
+        // that.data.task.finished_date = new Date(that.data.task.finished_date).toJSON();  但是时间为空则是 2000-12-31T16:00:00.000Z
+        that.data.task.end_date = util.setDateFormat(that.data.task.end_date)
+        that.data.task.finished_date = util.setDateFormat(that.data.task.finished_date)
+        task_api.save(that.data.task.id, that.data.task)
     },
 
     async tapAddFile(e) {
@@ -154,7 +175,7 @@ Page({
             e.detail.day = '0' + e.detail.day
         }
         CHOOSE_END_DATE = e.detail.year + "-" + e.detail.month + "-" + e.detail.day
-        that.data.task.week = e.detail.week
+        that.data.task.week = e.detail.week + 1 //week需要多加1，后端如果0的话不会更新
     },
 
     //点击日历的确定
@@ -201,13 +222,30 @@ Page({
     },
 
 
-    updateTask() {
-        var that = this
-        // that.data.task.end_date = new Date(that.data.task.end_date).toJSON();
-        // that.data.task.finished_date = new Date(that.data.task.finished_date).toJSON();  但是时间为空则是 2000-12-31T16:00:00.000Z
-        that.data.task.end_date = util.setDateFormat(that.data.task.end_date)
-        that.data.task.finished_date = util.setDateFormat(that.data.task.finished_date)
-        task_api.save(that.data.task.id, that.data.task)
-    }
+
+
+
+    // 这里不满意啊，代码复用了
+    tapFinish(e) {
+        var task = e.currentTarget.dataset.item
+        if (!task.id) return
+        util.touchFeedback(this.data.setting)
+        task.finished_date = util.getNowDateFormat()
+        task_api.finish(task.id, task)
+        task.is_finished = true //为啥不等接口返回成功再改，为了用户体验，担心延迟太久，出问题也不管啦。
+        this.setData({
+            task
+        })
+    },
+
+    tapCancel(e) {
+        var task = e.currentTarget.dataset.item
+        if (!task.id) return
+        task_api.cancelFinish(task.id)
+        task.is_finished = false //为啥不等接口返回成功再改，为了用户体验，担心延迟太久，出问题也不管啦。
+        this.setData({
+            task
+        })
+    },
 
 })

@@ -23,62 +23,6 @@
     }
 }
 
-.taskRow {
-    width: 690rpx;
-    margin: 7rpx 30rpx;
-    height: 120rpx;
-
-    .taskRow-left {
-        background-color: white;
-        border-radius: 20rpx;
-        border: 1rpx solid #f0f0f0;
-        height: 120rpx;
-        padding: 0 20rpx;
-
-        .task-icon {
-            width: 80rpx;
-            height: 80rpx;
-        }
-
-        .task-icon2 {
-            width: 63rpx;
-            height: 63rpx;
-        }
-
-        .task-rightPart {
-            margin-left: 20rpx;
-            font-size: 32rpx;
-
-            .task-rightPart-bottomRow {
-                color: #515151;
-                font-size: 28rpx;
-
-                image {
-                    margin-left: -6rpx;
-                    width: 40rpx;
-                    height: 40rpx;
-                    margin-right: 6rpx;
-                }
-            }
-        }
-    }
-
-    .taskRow-right {
-        border-radius: 20rpx;
-        background-color: #f5222d;
-        border: 1rpx solid #f0f0f0;
-        width: 150rpx;
-        height: 120rpx;
-
-        image {
-            width: 40rpx;
-            height: 40rpx;
-            margin: auto 50rpx;
-        }
-    }
-}
-
-
 .addIcon {
     position: fixed;
     bottom: 80px;
@@ -105,6 +49,7 @@
         margin-bottom: 70rpx;
 
         position: relative;
+
         /* 设置相对定位 */
         view {
             /* 绝对定位，4 个方向设置为 0 后，margin 设为 auto */
@@ -115,10 +60,17 @@
             bottom: 0;
             margin: auto;
         }
-        .teamPop-topRow-button{
+
+        .teamPop-topRow-button {
             position: absolute;
-            right: 36rpx;
-            margin: auto 0;
+            right: 50rpx;
+            margin: auto;
+
+            view {
+                width: 60rpx;
+                font-size: 24rpx;
+                font-size: normal;
+            }
         }
     }
 
@@ -131,6 +83,7 @@
         .teamPop-matePart-part {
             margin-top: 20rpx;
             width: 120rpx;
+
             .teamPop-matePart-name {
                 font-size: 26rpx;
             }

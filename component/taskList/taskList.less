@@ -1,0 +1,111 @@
+.taskRow {
+    width: 690rpx;
+    margin: 7rpx 30rpx;
+    height: 120rpx;
+
+    // 害组件内不能用全局样式，草 我没引入
+    .taskRow-left {
+        background-color: white;
+        border-radius: 20rpx;
+        border: 1rpx solid #f0f0f0;
+        height: 120rpx;
+        padding: 0 20rpx;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .task-icon {
+            width: 80rpx;
+            height: 80rpx;
+        }
+
+        .task-icon2 {
+            width: 63rpx;
+            height: 63rpx;
+        }
+
+        .task-rightPart {
+            margin-left: 20rpx;
+            font-size: 32rpx;
+
+            .task-rightPart-bottomRow {
+                color: #515151;
+                font-size: 28rpx;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                image {
+                    margin-left: -6rpx;
+                    width: 40rpx;
+                    height: 40rpx;
+                    margin-right: 6rpx;
+                }
+            }
+        }
+    }
+
+    .taskRow-right {
+        border-radius: 20rpx;
+        background-color: #f5222d;
+        border: 1rpx solid #f0f0f0;
+        width: 150rpx;
+        height: 120rpx;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        image {
+            width: 40rpx;
+            height: 40rpx;
+            margin: auto 50rpx;
+        }
+    }
+}
+
+.collapse {
+    margin-top: 30rpx;
+    padding: 0rpx 20rpx;
+
+    .collapse-rowTitle {
+        background-color: #b1b1b1;
+        text-align: center;
+        height: 50rpx;
+        border-radius: 10rpx;
+        width: 150rpx;
+        font-size: 26rpx;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        .collapse-icon {
+            width: 30rpx;
+            height: 30rpx;
+            margin: 0 5rpx 0 -5rpx;
+        }
+
+        // .collapse-icon::after {
+        //     width: 30rpx;
+        //     height: 30rpx;
+        //     margin: 0 5rpx 0 -5rpx;
+        //     transform: rotate(90deg);
+        // }
+    }
+
+    .taskRow {
+        margin-left: -5rpx;
+    }
+}
+
+
+
+
+.align-center {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+}

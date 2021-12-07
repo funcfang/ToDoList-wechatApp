@@ -66,6 +66,9 @@
   font-size: 28rpx;
   color: #515151;
 }
+.bottom-fixed .bottom-fixed-row view {
+  margin-left: 32rpx;
+}
 .bottom-fixed .bottom-fixed-row image {
   width: 50rpx;
   height: 50rpx;

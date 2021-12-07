@@ -14,7 +14,7 @@ Page({
 
     onLoad: function (options) {
         var that = this
-        that.getUserInfo()
+        // that.getUserInfo()
         that.updateTodayMoment()
         util.isFullScreen().then(e => {
             if (e) {
@@ -46,12 +46,17 @@ Page({
                     user_api.login({
                         "code": res.code
                     }).then(e => {
+                        // 害，早知道后端初始化用户得了
                         e.user.username = e.user.username === "" ? "💻" : e.user.username
                         e.user.avatar = e.user.avatar === "" ? "/images/mine/avatar.png" : getApp().globalData.API_FILE + e.user.avatar
                         wx.setStorageSync('user', e.user)
                         wx.setStorageSync('token', e.data.token)
+                        let setting = {
+                            is_click_heavy: e.user.is_click_heavy,
+                            is_click_sound: e.user.is_click_sound,
+                        }
                         getApp().globalData.user = e.user
-
+                        getApp().globalData.setting = setting
                     })
                 } else {
                     console.log('登录失败！' + res.errMsg)
@@ -90,23 +95,4 @@ Page({
         }
     },
 
-    onHide: function () {
-
-    },
-
-
-
-    onPullDownRefresh: function () {
-
-    },
-
-
-    onReachBottom: function () {
-
-    },
-
-
-    onShareAppMessage: function () {
-
-    }
 })

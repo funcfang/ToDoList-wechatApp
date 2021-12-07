@@ -1,10 +1,10 @@
 {
   "usingComponents": {
-    "l-slide-view":"/miniprogram_npm/lin-ui/slide-view/index",
     "l-popup":"/miniprogram_npm/lin-ui/popup/index",
     "l-avatar":"/miniprogram_npm/lin-ui/avatar/index",
     "l-button":"/miniprogram_npm/lin-ui/button/index",
-    "l-icon":"/miniprogram_npm/lin-ui/icon/index"
+    "l-icon":"/miniprogram_npm/lin-ui/icon/index",
+    "taskList":"/component/taskList/taskList"
   },
   "navigationBarTitleText": ""
 }

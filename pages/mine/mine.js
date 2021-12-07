@@ -1,4 +1,8 @@
 
+import {
+    user_api
+} from '../../api/common/index'
+
 Page({
 
     data: {
@@ -6,9 +10,9 @@ Page({
             username:"💻",
             avatar:"/images/mine/avatar.png"
         },
-        finish:{
-            today:1,
-            total:2,
+        taskStatus:{
+            finished_task_amount:null,
+            unfinished_task_amount:null,
         }
     },
 
@@ -26,8 +30,17 @@ Page({
                 selected: 2
             })
         }
+        this.getUserTaskStatus()
         this.setData({
             user:wx.getStorageSync('user')
+        })
+    },
+
+    getUserTaskStatus(){
+        user_api.taskStatus().then(taskStatus=>{
+            this.setData({
+                taskStatus
+            })
         })
     },
 

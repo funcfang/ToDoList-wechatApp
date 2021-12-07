@@ -14,7 +14,7 @@ const task_api = {
     },
 
     cancelFinish(task_id){
-        return request(base_url + '/' + task_id + "/cancel","post", data,false)
+        return request(base_url + '/' + task_id + "/cancel","post", "",false)
     },
 
     uploadFile(task_id, file) {

@@ -6,7 +6,7 @@
     <view class="topArea-left align-center">
         <!-- <image class="topArea-left-icon" mode="heightFix" src="/images/list/listDetail/circle.png"></image> -->
         <image wx:if="{{!task.is_finished}}" class="topArea-left-icon" mode="heightFix" src="/images/list/listDetail/circle.png" bindtap="tapFinish" data-item="{{task}}"></image>
-        <image wx:else class="topArea-left-icon2" mode="heightFix" src="/images/finish.png" bindtap="tapCancel" data-item="{{task}}"></image>
+        <image wx:else class="topArea-left-icon2" mode="heightFix" src="/images/finish.png" bindtap="tapCancel" data-item="{{task}}" style="margin-left: 10rpx;"></image>
         <view class="top-Area-inputView align-center" style="background-color: {{isInputName?'#ebebeb':'#f6f6f6'}};">
             <input placeholder="任务名称" type="text" value="{{task.name}}" bindblur="input_name" bindfocus="tapInputName" style="width: 400rpx;" />
         </view>
@@ -33,18 +33,19 @@
     </view>
 </block>
 
-<view class="final-row align-center" bindtap="tapPhoto">
-    <image class="icon" mode="heightFix" src="/images/task/photo.png"></image>
-    <view>添加图片</view>
-</view>
-
-
-<view class="file-row">
+<view class="final-row" bindtap="tapPhoto">
+    <view class="align-center" style="margin-bottom:30rpx">
+        <image class="icon" mode="heightFix" src="/images/task/photo.png"></image>
+        <view>添加图片</view>
+    </view>
     <l-album urls='{{task.photos}}' key='path'></l-album>
 </view>
 
+
+
+
 <view class="textarea">
-    <textarea style="width: 100%;" name="content" id="" cols="30" rows="10" placeholder="描述" value="{{task.description}}" maxlength="-1" bindblur="input_description" bindconfirm="input_description"></textarea>
+    <textarea style="width: 100%;" name="content" id="" cols="30" rows="10" placeholder="描述" value="{{task.description}}" maxlength="-1" bindinput="input_description" bindblur="blur_description" bindconfirm="blur_description"></textarea>
 </view>
 
 
@@ -54,8 +55,8 @@
 <view class="bottom-fixed" wx:if="{{task.name}}">
     <view class="bottom-fixed-row align-center">
         <view></view>
-        <view wx:if="{{task.finished_date[0]!='0'}}">完成于 {{substr.timeSub_MonthDay(task.finished_date)}}</view>
-        <view wx:else>创建于 {{substr.timeSub_MonthDay(task.created_at)}}</view>
+        <view wx:if="{{task.is_finished}}">完成于 {{substr.timeSub_MonthDay(task.finished_date)}}</view>
+        <view wx:elif="{{task.id}}">创建于 {{substr.timeSub_MonthDay(task.created_at)}}</view>
         <image bindtap="tapDelete" mode="heightFix" src="/images/task/delete.png"></image>
     </view>
 </view>

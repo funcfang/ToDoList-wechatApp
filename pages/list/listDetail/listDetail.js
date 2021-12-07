@@ -1,6 +1,7 @@
 import {
     list_api,
-    task_api
+    task_api,
+    user_api
 } from '../../../api/common/index'
 
 const util = require("../../../utils/util")
@@ -12,60 +13,34 @@ Page({
         isShowTeamPop: false,
         list: {},
         tasks: [],
-        weekArray: [],
-        teamMates: [{
-                name: "sss",
-                avatar: "/upload/avatar/3d8418fc-ff58-4374-a40c-1c5173283193-13rvkpbo51q62260bca300ecfe08b4965f170147ebb6.jpg"
-            },
-            {
-                name: "sss",
-                avatar: "/upload/avatar/3d8418fc-ff58-4374-a40c-1c5173283193-13rvkpbo51q62260bca300ecfe08b4965f170147ebb6.jpg"
-            }, {
-                name: "sss",
-                avatar: "/upload/avatar/3d8418fc-ff58-4374-a40c-1c5173283193-13rvkpbo51q62260bca300ecfe08b4965f170147ebb6.jpg"
-            },
-            {
-                name: "sss",
-                avatar: "/upload/avatar/3d8418fc-ff58-4374-a40c-1c5173283193-13rvkpbo51q62260bca300ecfe08b4965f170147ebb6.jpg"
-            }, {
-                name: "sss",
-                avatar: "/upload/avatar/3d8418fc-ff58-4374-a40c-1c5173283193-13rvkpbo51q62260bca300ecfe08b4965f170147ebb6.jpg"
-            },
-            {
-                name: "sss",
-                avatar: "/upload/avatar/3d8418fc-ff58-4374-a40c-1c5173283193-13rvkpbo51q62260bca300ecfe08b4965f170147ebb6.jpg"
-            }, {
-                name: "sss",
-                avatar: "/upload/avatar/3d8418fc-ff58-4374-a40c-1c5173283193-13rvkpbo51q62260bca300ecfe08b4965f170147ebb6.jpg"
-            },
-            {
-                name: "sss",
-                avatar: "/upload/avatar/3d8418fc-ff58-4374-a40c-1c5173283193-13rvkpbo51q62260bca300ecfe08b4965f170147ebb6.jpg"
-            },
-        ],
+        teamMembers: [],
         isFullScreen: false,
         isInputListName: false,
         isCloseSlider: false,
+        setting: getApp().globalData.setting,
+        Task_api: {},
     },
 
     onLoad: function (options) {
         var that = this
-        if (options.data) {  
+        that.setData({
+            Task_api: task_api
+        })
+        that.data.setting = getApp().globalData.setting
+        if (options.data) {
             var list = JSON.parse(options.data)
             that.setData({
                 list,
-                user: getApp().globalData.user, //需要自己在重新setdata，不知道为什么data直接定义中不行
-                weekArray: getApp().globalData.weekArray
+                user: wx.getStorageSync('user'),
             })
-        }else{  //邀请
+        } else { //邀请
             let list = {
-                id : options.list_id
+                id: options.list_id
             }
             that.setData({
-                list
+                list,
             })
-            that.getUserInfo()
-
+            that.joinTeam(options.list_id, options.from_user_id)
         }
     },
 
@@ -73,9 +48,10 @@ Page({
         this.getTaskList()
     },
 
-    getUserInfo() {
+    joinTeam(list_id, from_user_id) {
+        util.showLodaingIng("加入小组中")
         wx.login({
-            success: res => {
+            success: res => { //这里写的太重复了，不知道为什么放util的话好像不能import接口
                 if (res.code) {
                     user_api.login({
                         "code": res.code
@@ -84,93 +60,91 @@ Page({
                         e.user.avatar = e.user.avatar === "" ? "/images/mine/avatar.png" : getApp().globalData.API_FILE + e.user.avatar
                         wx.setStorageSync('user', e.user)
                         wx.setStorageSync('token', e.data.token)
+                        let setting = {
+                            is_click_heavy: e.user.is_click_heavy,
+                            is_click_sound: e.user.is_click_sound,
+                        }
                         getApp().globalData.user = e.user
+                        getApp().globalData.setting = setting
+                        if (from_user_id * 1 === e.user.id) {
+                            wx.hideLoading()
+                            util.showToast('不能加入自己的小组', "error", 1500, true)
+                            setTimeout(() => {
+                                wx.reLaunch({
+                                    url: '/pages/index/index',
+                                })
+                            }, 1500)
+                            return
+                        }
+                        list_api.add_joinList({
+                            user_id: e.user.id * 1,
+                            list_id: list_id * 1,
+                            is_join: true,
+                        }).then(e => {
+                            wx.hideLoading()
+                            util.showToast("加入小组成功")
+                        }).catch(err => {
+                            util.showToast('错误，加入小组失败', "error", 1500, true)
+                            setTimeout(() => {
+                                wx.reLaunch({
+                                    url: '/pages/index/index',
+                                })
+                            }, 1500)
+                        })
 
                     })
                 } else {
                     console.log('登录失败！' + res.errMsg)
+                    util.showToast("加入失败,网络错误", "error", 1500, true)
+                    setTimeout(() => {
+                        wx.reLaunch({
+                            url: '/pages/index/index',
+                        })
+                    }, 1500)
                 }
             },
             fail: res => {
-                util.showModalErrorAndMsg("错误", "网络超时")
-            }
-        })
-    },
+                wx.hideLoading()
+                util.showToast("加入失败,网络超时", "error", 1500, true)
+                setTimeout(() => {
+                    wx.reLaunch({
+                        url: '/pages/index/index',
+                    })
+                }, 1500)
 
-    tapTeam() {
-        this.setData({
-            isShowTeamPop: true
-        })
-    },
-
-    tapFinish(e) {
-        var task = e.currentTarget.dataset.item
-        task.finished_date = util.getNowDateFormat()
-        if (task.end_date) {
-            task.end_date = util.setDateFormat(task.end_date)
-        } else {
-            task.end_date = "0001-01-01T23:59:59.000Z"
-        }
-        task_api.finish(task.id, task).then(() => {
-            this.getTaskList()
-        })
-    },
-
-    tapCancel(e) {
-        var task = e.currentTarget.dataset.item
-        task_api.cancelFinish(task.id).then(() => {
-            this.getTaskList()
+            },
         })
     },
 
     getTaskList() {
         var that = this
         task_api.get_list({
-            list_id: that.data.list.id
+            list_id: that.data.list.id,
+            is_finished: true
         }).then(e => {
             that.setData({
-                tasks: e.data
+                finishedTasks: e.data
+            })
+        })
+        task_api.get_list({
+            list_id: that.data.list.id,
+            is_finished: false
+        }).then(e => {
+            that.setData({
+                unfinishedTasks: e.data
             })
         })
     },
 
     isFullScreen() {
-        util.isFullScreen().then(e => {
-            if (e) {
+        util.isFullScreen().then(isTrue => {
+            if (isTrue) {
                 that.setData({
                     isFullScreen: true
                 })
                 getApp().globalData.isFullScreen = true
             }
         })
-    },
-
-
-    tapTask(e) {
-        let item = e.currentTarget.dataset.item
-        wx.navigateTo({
-            url: '../../task/task?task=' + JSON.stringify(item),
-        })
-    },
-
-
-    tapDeleteTask(e) {
-        var that = this
-        wx.showActionSheet({
-            alertText: "将永久删除该任务，无法撤回",
-            itemColor: "#f5222d",
-            itemList: ['删除任务'],
-            success() {
-                task_api.delete(e.currentTarget.id).then(() => {
-                    that.getTaskList()
-                })
-            },
-            fail(res) {
-                console.log(res.errMsg)
-            }
-        })
-
-
     },
 
     tapDeleteList() {
@@ -218,15 +192,30 @@ Page({
 
     tapAdd() {
         wx.navigateTo({
-            url: '../../task/task?list_id=' + this.data.list.id,
+            url: '/pages/task/task?list_id=' + this.data.list.id,
+        })
+    },
+
+    tapMembers() {
+        this.getListMembers()
+        this.setData({
+            isShowTeamPop: true
+        })
+    },
+
+    getListMembers() {
+        list_api.get_listMember(this.data.list.id).then(e => {
+            this.setData({
+                teamMembers: e
+            })
         })
     },
 
     onShareAppMessage() {
         return {
-            title: '加入我的小组-' + this.data.list.name,
+            title: '加入我的小组 “' + this.data.list.name + " ”",
             path: '/pages/list/listDetail/listDetail?list_id=' + this.data.list.id + "&from_user_id=" + getApp().globalData.user.id,
         }
-    }
+    },
 
 })

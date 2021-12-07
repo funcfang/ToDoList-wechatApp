@@ -97,9 +97,9 @@ function setTimeFormat(time) {
 }
 
 // 将日期转换成标准格式 --time无时分，即年月日时分秒，2021-08-02 
-// 2021-08-02 -> 2001-01-01T23:59:59.000Z+08:00
+// 2021-08-02 -> 2001-01-01T15:59:59.000Z+08:00
 function setDateFormat(time) {
-  return time.substr(0, 10) + "T23:59:59.000Z"
+  return time.substr(0, 10) + "T15:59:59.000Z" //这里直接处理相差8小时的问题
 }
 
 // 已解决时区差8小时问题
@@ -107,7 +107,7 @@ function setDateFormat(time) {
 // 解决使用 moment.js 格式化本地时间戳时多出了 8 小时问题，这 8 小时是本地时间与格林威治标准时间 (GMT) 的时差
 function getNowDateFormat() {
   var myDate = new Date(); //获取系统当前时间
-  myDate.setHours(date.getHours() + date.getTimezoneOffset() / 60)
+  myDate.setHours(myDate.getHours() + myDate.getTimezoneOffset() / 60)
   let year = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
   let month = myDate.getMonth() + 1; //获取当前月份(0-11,0代表1月)
   let day = myDate.getDate(); //获取当前日(1-31)
@@ -128,25 +128,6 @@ function substrTime(time) {
   return time.substring(0, 10) + " " + time.substring(11, 16)
 }
 
-//转换时间函数 --自己写了才发现原来本来就有 - -！
-function changeDate(time) {
-  var year = time.getFullYear()
-  var month = time.getMonth() + 1 //注意getMonth()返回是 0-11
-  var day = time.getDate()
-  var hour = time.getHours()
-  var minute = time.getMinutes()
-  if (month < 10)
-    month = '0' + month
-  if (day < 10)
-    day = '0' + day
-  if (hour < 10)
-    hour = '0' + hour
-  if (minute < 10)
-    minute = '0' + minute
-  var time = year + '-' + month + '-' + day + ' ' + hour + ":" + minute
-  return time
-}
-
 //预览文件
 function readFile(file_url) {
   showLodaingIng("加载中")
@@ -154,7 +135,6 @@ function readFile(file_url) {
     url: getApp().globalData.API_FILE + file_url,
     method: "GET",
     header: {
-      'X-APP': "MiniProgram",
       'content-type': "application/json; charset=utf-8",
       'token': wx.getStorageSync('token')
     },
@@ -251,12 +231,7 @@ const chooseFile = (amount) => {
       count: amount,
       type: 'file',
       success(res) {
-        // tempFilePath可以作为img标签的src属性显示图片
-        // const tempFilePaths = res.tempFiles
         resolve(res.tempFiles)
-
-        // that.data.uploads_add = res.tempFiles
-        // console.log(tempFilePaths)
       },
       fail() {
         console.log("退出选择文件")
@@ -268,7 +243,7 @@ const chooseFile = (amount) => {
 
 const getUserInfo = () => {
   return new Promise((resolve, reject) => {
-    console.log('user_api', user_api,api)
+    console.log('user_api', user_api, api)
     wx.login({
       success: res => {
         if (res.code) {
@@ -279,7 +254,12 @@ const getUserInfo = () => {
             e.user.avatar = e.user.avatar === "" ? "/images/mine/avatar.png" : getApp().globalData.API_FILE + e.user.avatar
             wx.setStorageSync('user', e.user)
             wx.setStorageSync('token', e.data.token)
+            let setting = {
+              is_click_heavy: e.user.is_click_heavy,
+              is_click_sound: e.user.is_click_sound,
+            }
             getApp().globalData.user = e.user
+            getApp().globalData.setting = setting
             resolve(e)
           })
         } else {
@@ -293,7 +273,29 @@ const getUserInfo = () => {
       }
     })
   })
+}
 
+
+const touchFeedback = (setting) => {
+  if (setting.is_click_sound) {
+    playAudio()
+  }
+  if (setting.is_click_heavy) {
+    wx.vibrateShort({
+      type: "medium"
+    })
+  }
+}
+
+
+function playAudio() {
+  const innerAudioContext = wx.createInnerAudioContext(true)
+  innerAudioContext.autoplay = true // 是否自动开始播放，默认为 false
+  innerAudioContext.src = '/resource/finished.mp3'; // 音频资源的地址
+  wx.setInnerAudioOption({ // ios在静音状态下能够正常播放音效
+    obeyMuteSwitch: true,   // 是否遵循系统静音开关，默认为 true。当此参数为 false 时，即使用户打开了静音开关，也能继续发出声音。
+    speakerOn:true
+  })
 }
 
 
@@ -312,5 +314,6 @@ module.exports = {
   chooseFile,
   showToast,
   getNowDateFormat,
-  getUserInfo
+  getUserInfo,
+  touchFeedback, // 完成操作反馈
 }

@@ -19,52 +19,6 @@
   height: 50rpx;
   margin: 0 30rpx;
 }
-.taskRow {
-  width: 690rpx;
-  margin: 7rpx 30rpx;
-  height: 120rpx;
-}
-.taskRow .taskRow-left {
-  background-color: white;
-  border-radius: 20rpx;
-  border: 1rpx solid #f0f0f0;
-  height: 120rpx;
-  padding: 0 20rpx;
-}
-.taskRow .taskRow-left .task-icon {
-  width: 80rpx;
-  height: 80rpx;
-}
-.taskRow .taskRow-left .task-icon2 {
-  width: 63rpx;
-  height: 63rpx;
-}
-.taskRow .taskRow-left .task-rightPart {
-  margin-left: 20rpx;
-  font-size: 32rpx;
-}
-.taskRow .taskRow-left .task-rightPart .task-rightPart-bottomRow {
-  color: #515151;
-  font-size: 28rpx;
-}
-.taskRow .taskRow-left .task-rightPart .task-rightPart-bottomRow image {
-  margin-left: -6rpx;
-  width: 40rpx;
-  height: 40rpx;
-  margin-right: 6rpx;
-}
-.taskRow .taskRow-right {
-  border-radius: 20rpx;
-  background-color: #f5222d;
-  border: 1rpx solid #f0f0f0;
-  width: 150rpx;
-  height: 120rpx;
-}
-.taskRow .taskRow-right image {
-  width: 40rpx;
-  height: 40rpx;
-  margin: auto 50rpx;
-}
 .addIcon {
   position: fixed;
   bottom: 80px;
@@ -100,8 +54,13 @@
 }
 .teamPop .teamPop-topRow .teamPop-topRow-button {
   position: absolute;
-  right: 36rpx;
-  margin: auto 0;
+  right: 50rpx;
+  margin: auto;
+}
+.teamPop .teamPop-topRow .teamPop-topRow-button view {
+  width: 60rpx;
+  font-size: 24rpx;
+  font-size: normal;
 }
 .teamPop .teamPop-matePart {
   display: flex;

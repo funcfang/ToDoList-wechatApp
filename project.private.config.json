@@ -41,6 +41,18 @@
                     "pathName": "pages/task/task",
                     "query": "list_id=4",
                     "scene": null
+                },
+                {
+                    "name": "pages/task/task",
+                    "pathName": "pages/task/task",
+                    "query": "task=%7B%22id%22%3A4%2C%22created_at%22%3A%222021-12-06%2023%3A58%3A15%22%2C%22updated_at%22%3A%222021-12-07%2000%3A13%3A37%22%2C%22name%22%3A%22123%22%2C%22user_id%22%3A1%2C%22list_id%22%3A1%2C%22end_date%22%3A%222021-12-12%2023%3A59%3A59%22%2C%22week%22%3A1%2C%22is_finished%22%3Afalse%2C%22finished_date%22%3A%222021-12-07%2000%3A13%3A00%22%2C%22description%22%3A%22112233%22%2C%22files%22%3A%5B%5D%2C%22photos%22%3A%5B%5D%7D",
+                    "scene": null
+                },
+                {
+                    "name": "allTaskList",
+                    "pathName": "pages/allTaskList/allTaskList",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

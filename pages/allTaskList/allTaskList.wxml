@@ -1,0 +1,6 @@
+<view class="top-Area">
+    全部事项
+</view>
+
+
+<taskList unfinishedTasks="{{unfinishedTasks}}" finishedTasks="{{finishedTasks}}"  api="{{Task_api}}" setting="{{setting}}" isAllTask="true" bindgetTaskList="getTaskList"></taskList>

@@ -1,7 +1,9 @@
 import {
-    list_api
+    list_api,
+    user_api
 } from '../../api/common/index'
-
+const util = require("../../utils/util")
+var join_form = {}
 
 Page({
 
@@ -9,7 +11,10 @@ Page({
      * 页面的初始数据
      */
     data: {
-        total_task: 1,
+        taskStatus: {
+            finished_task_amount: null,
+            unfinished_task_amount: null,
+        },
         collapse: {
             create_expand: true,
             join_expand: false,
@@ -20,17 +25,14 @@ Page({
         },
         isListName: false,
         listName: "",
-        myLists: []
+        create_list: [],
+        join_list: [],
     },
 
     onLoad: function (options) {
 
     },
 
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
     onShow: function () {
         if (typeof this.getTabBar === 'function' &&
             this.getTabBar()) {
@@ -39,10 +41,23 @@ Page({
             })
         }
         this.getMyLists()
+        this.getUserTaskStatus()
     },
 
-    tapCreateList() {
+    getUserTaskStatus() {
+        user_api.taskStatus().then(taskStatus => {
+            this.setData({
+                taskStatus
+            })
+        })
+    },
+
+    tapShowPop(e) {
         var that = this
+        console.log(e)
+        that.setData({
+            popType: e.currentTarget.id
+        })
         let popShow = that.data.popShow
         popShow.isShowCreatePop = true
         that.setData({
@@ -65,9 +80,14 @@ Page({
 
     getMyLists() {
         var that = this
-        list_api.get_list().then(e => {
+        list_api.get_createList().then(e => {
             that.setData({
-                myLists: e.data
+                create_list: e
+            })
+        })
+        list_api.get_joinList().then(e => {
+            that.setData({
+                join_list: e
             })
         })
     },
@@ -87,18 +107,38 @@ Page({
         }
     },
 
-    tapCreateConfirm() {
+    input(e) {
+        if (e.currentTarget.id === 'man') {
+            join_form.user_id = e.detail.value * 1
+        } else {
+            join_form.list_id = e.detail.value * 1
+        }
+    },
+
+    async tapConfirm() {
         var that = this
-        list_api.save(null, {
-            name: this.data.listName
-        }).then((e) => {
-            that.getMyLists()
-            that.tapPopCancel()
-            that.setData({
-                listName: ""
-            })  
-            this.navigatetoDetail(e)
+        join_form.name = this.data.listName
+        if (this.data.listName == '') return
+        if (join_form.name === '' || join_form.user_id === '' || join_form.list_id === '') {
+            util.showToast("请填写完整信息")
+            return
+        }
+        var e
+        if (that.data.popType === 'create') {
+            e = await list_api.save(null, {
+                name: this.data.listName
+            })
+        } else {
+            join_form.is_join = true
+            e = await list_api.add_joinList(join_form)
+        }
+        that.getMyLists()
+        that.tapPopCancel()
+        that.setData({
+            listName: "",
+            join_form:{}
         })
+        this.navigatetoDetail(e)
     },
 
 
@@ -112,32 +152,15 @@ Page({
     },
 
 
-    tapMyList(e) {
+    tapList(e) {
         var item = e.currentTarget.dataset.item
         this.navigatetoDetail(item)
     },
 
-    navigatetoDetail(item){
+    navigatetoDetail(item) {
         wx.navigateTo({
-          url: './listDetail/listDetail?data='+JSON.stringify(item),
+            url: '/pages/list/listDetail/listDetail?data=' + JSON.stringify(item),
         })
     },
 
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    }
 })

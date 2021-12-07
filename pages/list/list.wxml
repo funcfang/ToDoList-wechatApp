@@ -1,19 +1,19 @@
-<view class="row" hover-class="hover-row">
+<navigator class="row" hover-class="hover-row" open-type="navigate" url="/pages/allTaskList/allTaskList">
     <view class="row-leftpart">
         <image mode="heightFix" src="/images/list/total.png"></image>
         <view>全部事项</view>
     </view>
-    <view class="row-rightpart">{{total_task}}</view>
-</view>
+    <view class="row-rightpart">{{taskStatus.unfinished_task_amount}}</view>
+</navigator>
 
-<view class="row" hover-class="hover-row" bindtap="tapCreateList">
+<view class="row" hover-class="hover-row" bindtap="tapShowPop" id="create">
     <view class="row-leftpart">
         <image mode="heightFix" src="/images/list/add.png"></image>
         <view>创建清单</view>
     </view>
 </view>
 
-<view class="row last-row" hover-class="hover-row">
+<view class="row last-row" hover-class="hover-row" bindtap="tapShowPop" id="join">
     <view class="row-leftpart">
         <image mode="heightFix" src="/images/list/join.png"></image>
         <view>加入清单</view>
@@ -28,17 +28,17 @@
             <view class="collapse-rowTitle" slot="title">
                 <view>我的创建</view>
                 <view class="collapse-rowTitle-amount">
-                    <view>{{myLists.length}}</view>
+                    <view>{{create_list.length}}</view>
                     <image wx:if="{{collapse.create_expand}}" class="collapse-icon" src="/images/down.png" mode="heightFix"></image>
                     <image wx:if="{{!collapse.create_expand}}" class="collapse-icon" src="/images/left.png" mode="heightFix"></image>
                 </view>
             </view>
 
             <view class="collapse-list">
-                <block wx:for="{{myLists}}" wx:key="id">
-                    <view class="collapse-list-row" bindtap="tapMyList" id="{{index}}" data-item="{{item}}">
-                        <view>{{item.name}}</view>
-                        <view>{{item.total_task}}</view>
+                <block wx:for="{{create_list}}" wx:key="id">
+                    <view class="collapse-list-row" bindtap="tapList" data-item="{{item.list}}">
+                        <view>{{item.list.name}}</view>
+                        <!-- <view>{{item.total_task}}</view> -->
                     </view>
                 </block>
             </view>
@@ -54,17 +54,17 @@
             <view class="collapse-rowTitle" slot="title">
                 <view>我的加入</view>
                 <view class="collapse-rowTitle-amount">
-                    <view>{{myLists.length}}</view>
+                    <view>{{join_list.length}}</view>
                     <image wx:if="{{collapse.join_expand}}" class="collapse-icon" src="/images/down.png" mode="heightFix"></image>
                     <image wx:if="{{!collapse.join_expand}}" class="collapse-icon" src="/images/left.png" mode="heightFix"></image>
                 </view>
             </view>
 
             <view class="collapse-list">
-                <block wx:for="{{myTypes}}" wx:key="id">
-                    <view class="collapse-list-row" bindtap="tapMyLists" id="{{index}}">
-                        <view>{{item.name}}</view>
-                        <view>{{item.total_task}}</view>
+                <block wx:for="{{join_list}}" wx:key="id">
+                    <view class="collapse-list-row" bindtap="tapList" data-item="{{item.list}}">
+                        <view>{{item.list.name}}</view>
+                        <!-- <view>{{item.total_task}}</view> -->
                     </view>
                 </block>
             </view>
@@ -79,12 +79,21 @@
     <view class="creatPop">
         <view class="creatPop-topRow">
             <view class="creatPop-topRow-cancel" bindtap="tapPopCancel">取消</view>
-            <view class="creatPop-topRow-titleName">创建清单</view>
-            <view style="color:{{isListName?'#5478c7':'#bfbfbf'}}" bindtap="tapCreateConfirm">确定</view>
+            <view class="creatPop-topRow-titleName">{{popType==='create'?'创建清单':'加入'}}</view>
+            <view wx:if="{{popType==='create'}}" style="color:{{isListName?'#5478c7':'#bfbfbf'}}" bindtap="tapConfirm">确定</view>
+            <view wx:else style="color:#5478c7" bindtap="tapConfirm">确定</view>
         </view>
         <view class="creatPop-inputRow">
             <image src="/images/list/list.png" mode="heightFix" class="cP-list_icon"></image>
-            <input type="text" placeholder="清单名称" bindinput="input_listName" />
+            <input type="text" placeholder="清单名称"  bindinput="input_listName" value="{{listName}}" />
+        </view>
+        <view class="creatPop-inputRow" wx:if="{{popType==='join'}}">
+            <image src="/images/list/createman.png" mode="heightFix" class="cP-list_icon"></image>
+            <input type="text" placeholder="清单创建人ID" id="man" bindinput="input" type="number" value="{{join_form.user_id}}" />
+        </view>
+        <view class="creatPop-inputRow" wx:if="{{popType==='join'}}">
+            <image src="/images/list/id.png" mode="heightFix" class="cP-list_icon"></image>
+            <input type="text" placeholder="清单ID" id="list" bindinput="input" type="number" value="{{join_form.list_id}}" />
         </view>
     </view>
 </l-popup>
