@@ -10,6 +10,7 @@ Page({
             username:"💻",
             avatar:"/images/mine/avatar.png"
         },
+        todayFinished_amount:null,
         taskStatus:{
             finished_task_amount:null,
             unfinished_task_amount:null,
@@ -32,8 +33,10 @@ Page({
         }
         this.getUserTaskStatus()
         this.setData({
-            user:wx.getStorageSync('user')
+            user:wx.getStorageSync('user'),
+            todayFinished_amount: wx.getStorageSync('todayFinished_amount')===''?0:wx.getStorageSync('todayFinished_amount'),
         })
+        // console.log(this.data.todayFinished_amount)
     },
 
     getUserTaskStatus(){

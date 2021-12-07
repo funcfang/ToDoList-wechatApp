@@ -35,3 +35,10 @@ page {
   align-items: center;
   justify-content: center;
 }
+
+.col-center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

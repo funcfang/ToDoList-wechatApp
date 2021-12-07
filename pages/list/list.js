@@ -54,7 +54,6 @@ Page({
 
     tapShowPop(e) {
         var that = this
-        console.log(e)
         that.setData({
             popType: e.currentTarget.id
         })
@@ -117,11 +116,14 @@ Page({
 
     async tapConfirm() {
         var that = this
-        join_form.name = this.data.listName
-        if (this.data.listName == '') return
-        if (join_form.name === '' || join_form.user_id === '' || join_form.list_id === '') {
-            util.showToast("请填写完整信息")
-            return
+        join_form.name = that.data.listName
+        if (that.data.popType === 'create') {
+            if (that.data.listName == '') return
+        } else {
+            if (join_form.name === '' || join_form.user_id === '' || join_form.list_id === '' || !join_form.user_id || !join_form.list_id) {
+                util.showToast("请填写完整信息")
+                return
+            }
         }
         var e
         if (that.data.popType === 'create') {
@@ -136,7 +138,7 @@ Page({
         that.tapPopCancel()
         that.setData({
             listName: "",
-            join_form:{}
+            join_form: {}
         })
         this.navigatetoDetail(e)
     },

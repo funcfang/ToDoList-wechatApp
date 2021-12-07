@@ -1,2 +1,53 @@
-<!--pages/about/about.wxml-->
-<text>pages/about/about.wxml</text>
+<div class="logoPart col-center">
+    <image src="/images/logo.png" mode="heightFix"></image>
+    <view>ToDo任务清单</view>
+</div>
+
+<view class="content">
+    <view>实现功能</view>
+    <text>
+        · 清单的创建及任务的发布
+        · 任务文件及图片的上传
+        · 清单小组的加入
+    </text>
+</view>
+
+<view class="content">
+    <view>One more thing</view>
+    <text>
+        ToDo 为我今年愿单之一,目前许多功能仍未完善,还在开发中,「我的一天」存在问题,推荐使用「清单」功能。
+    </text>
+</view>
+
+
+<view class="codeOpen">
+    <view class="codeOpen-title">项目已开源</view>
+    <view class="codeOpen-bottom align-center">
+        <view class="codeOpen-part align-center" bindtap="tapCopyLink" data-path="https://github.com/fangfang1122/ToDoList-wechatApp">
+            <image class="icon" src="/images/about/github.png" mode="heightFix"></image>
+            <view>小程序</view>
+        </view>
+        <view class="codeOpen-part align-center"  bindtap="tapCopyLink" data-path="https://github.com/fangfang1122/ToDoList_Server">
+            <image class="icon" src="/images/about/github.png" mode="heightFix"></image>
+            <view>后端Go</view>
+        </view>
+    </view>
+</view>
+
+
+
+<!-- <view class="url">小程序端:https://github.com/fangfang1122/ToDoList-wechatApp</view>
+<view class="url">后端:https://github.com/fangfang1122/ToDoList_Server</view> -->
+
+
+<!-- <view class="content">
+    ToDo任务清单是今年的愿单之一，想自己走一遍前后端开发的流程，现在也算是满足了心愿吧，第一版由于做的实在过于糟糕，所以最后赶忙地花了将近3天的时间重新开发了ToDo。
+</view> -->
+
+<div class="footer col-center">
+    <view class="align-center" style="font-style:italic;margin-bottom: 20rpx;">
+        Made by
+        <view style="background-color: #ebebeb; border-radius: 10rpx; padding: 6rpx 12rpx;margin: 0 12rpx;font-style: normal;font-weight: bold;">funcfang</view>
+    </view>
+    <view>Version:1.0.0</view>
+</div>

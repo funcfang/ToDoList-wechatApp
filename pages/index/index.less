@@ -1,37 +1,56 @@
 .top-Area {
-    padding:20rpx 30rpx 20rpx 20rpx;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    padding: 20rpx 30rpx 20rpx 20rpx;
     justify-content: space-between;
 
-    .tA-icon {
+    .top-Area-left {
+        .top-Area-title {
+            font-size: 46rpx;
+            color: #2c2c2c;
+            font-weight: bold;
+        }
+
+        .top-Area-date {
+            margin-top: 6rpx;
+            font-size: 32rpx;
+
+            .top-Area-momentIcon {
+                margin-left: 24rpx;
+                width: 40rpx;
+                height: 40rpx;
+            }
+        }
+    }
+
+    .top-Area-icon {
         width: 50rpx;
         height: 50rpx;
     }
-
-    .tA-title {
-        font-size: 46rpx;
-        color:#2c2c2c;
-        font-weight: bold;
-    }
-
-    .tA-date {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-top: 6rpx;
-        font-size: 32rpx;
-    }
-
-    .momentIcon {
-        margin-left: 24rpx;
-        width: 40rpx;
-        height: 40rpx;
-    }
 }
 
+.popArea{
+    width: 600rpx;
+    height: 700rpx;
+    border-radius: 50rpx;
+    padding: 30rpx;
+    background-color: white;
+    .popArea-topRow{
+        text-align: center;
+        font-size: 34rpx;
+        font-weight: bold;
+        margin-bottom: 30rpx;
+    }
 
+    .popArea-collapse-list{
+        .popArea-collapse-list-row{
+            margin: 4rpx 30rpx;
+            justify-content: space-between;
+            image{
+                width: 30rpx;
+                height: 30rpx;
+            }
+        }
+    }
+}
 
 
 .addIcon {

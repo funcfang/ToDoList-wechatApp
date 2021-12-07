@@ -1,19 +1,93 @@
-<view class="top-Area">
-  <view class="tA-left">
-    <view class="tA-title">我的一天</view>
-    <view class="tA-date">
+<view class="top-Area align-center">
+  <view class="top-Area-left ">
+    <view class="top-Area-title">我的一天</view>
+    <view class="top-Area-date align-center">
       <view>{{now_date}}</view>
-      <image class="momentIcon" mode="widthFix"
-        src="/images/index/{{momentIcon_show=='morning'?'morning':momentIcon_show=='afternoon'?'afternoon':'evening'}}.png">
+      <image class="top-Area-momentIcon" mode="widthFix" src="/images/index/{{momentIcon_show=='morning'?'morning':momentIcon_show=='afternoon'?'afternoon':'evening'}}.png">
       </image>
     </view>
   </view>
-  <image class="tA-icon" src="/images/index/addTodayTask.png" mode="widthFix" bindtap="tapChooseList"></image>
+  <image class="top-Area-icon" src="/images/index/addTodayTask.png" mode="heightFix" bindtap="tapSHowChooseTaskPop"></image>
 </view>
 
+<taskList unfinishedTasks="{{unfinishedTasks_today}}" finishedTasks="{{finishedTasks_today}}" api="{{Task_api}}"  isTodayTask="true"
+bindcancelTodayTask="cancelTodayTask" bindfinishTodayTask="finishTodayTask" binddelTodayTask="delTodayTask"></taskList>
 
 
+<!-- 引用 WXS 模块 substr.wxs -->
+<wxs src="/utils/substr.wxs" module="substr" />
 
-<view class="addIcon" hover-class="hover" style="bottom:{{isFullScreen?'130rpx':'66rpx'}}" bindtap="tapAdd">
-    <image mode="heightFix" src="/images/list/listDetail/add.svg"></image>
-</view>
+<!-- 任务弹出窗 -->
+<l-popup show="{{isShowPop}}" content-align="center">
+  <view class="popArea">
+    <view class="popArea-topRow">
+      添加任务
+    </view>
+
+    <l-collapse type="accordion">
+      <l-collapse-item title="我的创建">
+        <l-collapse type="accordion">
+          <view class="popArea-collapse-list">
+            <block wx:for="{{create_list}}" wx:key="id">
+              <l-collapse type="accordion">
+
+                <l-collapse-item title="{{item.list.name}}" bindtap="tapList" id="create" data-list_id="{{item.list_id}}" data-index="{{index}}">
+                  <l-collapse type="accordion">
+                    <view class="popArea-collapse-list">
+                      <block wx:for="{{item.tasks}}" wx:key="id" wx:for-item="task">
+                        <view class="popArea-collapse-list-row align-center">
+                          <view class="align-center">
+                            <view>{{task.name}}</view>
+                            <image wx:if="{{task.end_date[0]!='0'}}" mode="heightFix" src="/images/list/listDetail/calendar.png" style="height: 36rpx;margin: 0 2rpx 0 14rpx;"></image>
+                            <view wx:if="{{task.end_date[0]!='0'}}" style="margin-right: 26rpx;">{{substr.timeSub_MonthDay(task.end_date)+" "+weekArray[task.week]}}</view>
+                          </view>
+                          <image src="/images/index/add.png" mode="heightFix" bindtap="tapAddTask" data-item="{{task}}"></image>
+                        </view>
+                      </block>
+                    </view>
+                  </l-collapse>
+                </l-collapse-item>
+
+              </l-collapse>
+            </block>
+          </view>
+        </l-collapse>
+      </l-collapse-item>
+
+      <l-collapse-item title="我的加入">
+        <l-collapse type="accordion">
+          <view class="popArea-collapse-list">
+            <block wx:for="{{join_list}}" wx:key="id">
+              <l-collapse type="accordion">
+
+                <l-collapse-item title="{{item.list.name}}" bindtap="tapList" id="join" data-list_id="{{item.list_id}}" data-index="{{index}}">
+                  <l-collapse type="accordion">
+                    <view class="popArea-collapse-list">
+                      <block wx:for="{{item.tasks}}" wx:key="id" wx:for-item="task">
+                        <view class="popArea-collapse-list-row align-center">
+                          <view class="align-center">
+                            <view>{{task.name}}</view>
+                            <image wx:if="{{task.end_date[0]!='0'}}" mode="heightFix" src="/images/list/listDetail/calendar.png" style="height: 36rpx;margin: 0 2rpx 0 14rpx;"></image>
+                            <view wx:if="{{task.end_date[0]!='0'}}" style="margin-right: 26rpx;">{{substr.timeSub_MonthDay(task.end_date)+" "+weekArray[task.week]}}</view>
+                          </view>
+                          <image src="/images/index/add.png" mode="heightFix" bindtap="tapAddTask" data-item="{{task}}"></image>
+                        </view>
+                      </block>
+                    </view>
+                  </l-collapse>
+                </l-collapse-item>
+
+              </l-collapse>
+            </block>
+          </view>
+        </l-collapse>
+      </l-collapse-item>
+
+    </l-collapse>
+  </view>
+</l-popup>
+
+
+<!-- <view class="addIcon" hover-class="hover" style="bottom:{{isFullScreen?'200rpx':'136rpx'}}" bindtap="tapAddIcon">
+  <image mode="heightFix" src="/images/list/listDetail/add.svg"></image>
+</view> -->

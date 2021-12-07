@@ -1,30 +1,45 @@
 .top-Area {
   padding: 20rpx 30rpx 20rpx 20rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   justify-content: space-between;
 }
-.top-Area .tA-icon {
-  width: 50rpx;
-  height: 50rpx;
-}
-.top-Area .tA-title {
+.top-Area .top-Area-left .top-Area-title {
   font-size: 46rpx;
   color: #2c2c2c;
   font-weight: bold;
 }
-.top-Area .tA-date {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.top-Area .top-Area-left .top-Area-date {
   margin-top: 6rpx;
   font-size: 32rpx;
 }
-.top-Area .momentIcon {
+.top-Area .top-Area-left .top-Area-date .top-Area-momentIcon {
   margin-left: 24rpx;
   width: 40rpx;
   height: 40rpx;
+}
+.top-Area .top-Area-icon {
+  width: 50rpx;
+  height: 50rpx;
+}
+.popArea {
+  width: 600rpx;
+  height: 700rpx;
+  border-radius: 50rpx;
+  padding: 30rpx;
+  background-color: white;
+}
+.popArea .popArea-topRow {
+  text-align: center;
+  font-size: 34rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+}
+.popArea .popArea-collapse-list .popArea-collapse-list-row {
+  margin: 4rpx 30rpx;
+  justify-content: space-between;
+}
+.popArea .popArea-collapse-list .popArea-collapse-list-row image {
+  width: 30rpx;
+  height: 30rpx;
 }
 .addIcon {
   position: fixed;

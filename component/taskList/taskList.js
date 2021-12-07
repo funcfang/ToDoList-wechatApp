@@ -6,6 +6,10 @@ Component({
      * 组件的属性列表
      */
     properties: {
+        isTodayTask:{
+            type:Boolean,
+            value:false,
+        },
         isAllTask:{
             type:Boolean,
             value:false,
@@ -22,10 +26,6 @@ Component({
             type: Object,
             value: {},
         },
-        setting: {
-            type: Object,
-            value: {}
-        }
     },
 
     data: {
@@ -34,7 +34,8 @@ Component({
         collapse:{
             finished_expand:false,
             unfinished_expand:false
-        }
+        },
+        setting:{}
     },
 
     lifetimes: {
@@ -84,6 +85,7 @@ Component({
         tapFinish(e) {
             this.closeSlider()
             util.touchFeedback(this.data.setting)
+            var that = this
             var task = e.currentTarget.dataset.item
             task.finished_date = util.getNowDateFormat()
             if (task.end_date) {
@@ -92,14 +94,36 @@ Component({
                 task.end_date = "0001-01-01T23:59:59.000Z"
             }
             API.finish(task.id, task).then(() => {
-                this.triggerEvent('getTaskList')
+                if(that.data.isTodayTask)
+                {
+                    task.is_finished = true
+                    that.triggerEvent('finishTodayTask', {
+                        index:e.currentTarget.dataset.index,
+                        task:task
+                    })
+                }else
+                {
+                    that.triggerEvent('getTaskList')
+                }
+                
             })
         },
 
         tapCancel(e) {
             var task = e.currentTarget.dataset.item
+            var that = this
             API.cancelFinish(task.id).then(() => {
-                this.triggerEvent('getTaskList')
+                if(that.data.isTodayTask)
+                {
+                    task.is_finished = false
+                    that.triggerEvent('cancelTodayTask', {
+                        index:e.currentTarget.dataset.index,
+                        task:task
+                    })
+                }else
+                {
+                    that.triggerEvent('getTaskList')
+                }
             })
         },
 
@@ -111,7 +135,18 @@ Component({
                 itemList: ['删除任务'],
                 success() {
                     API.delete(e.currentTarget.id).then(() => {
-                        that.triggerEvent('getTaskList')
+
+                        if(that.data.isTodayTask)
+                        {
+                            that.triggerEvent('delTodayTask', {
+                                index:e.currentTarget.dataset.index,
+                                type:e.currentTarget.dataset.type,
+                            })
+                        }else
+                        {
+                            that.triggerEvent('getTaskList')
+                        }
+
                     })
                 },
                 fail(res) {

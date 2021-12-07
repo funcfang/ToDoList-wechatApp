@@ -5,8 +5,8 @@
     <view class="taskRow">
         <l-slide-view height="120" width="690" slide-width="150" close="{{isCloseSlider}}">
             <view slot="left" class="taskRow-left align-center">
-                <image wx:if="{{!item.is_finished}}" class="task-icon" mode="heightFix" src="/images/list/listDetail/circle.png" bindtap="tapFinish" data-item="{{item}}"></image>
-                <image wx:else class="task-icon2" mode="heightFix" src="/images/finish.png" bindtap="tapCancel" data-item="{{item}}"></image>
+                <image wx:if="{{!item.is_finished}}" class="task-icon" mode="heightFix" src="/images/list/listDetail/circle.png" bindtap="tapFinish" data-item="{{item}}"  data-index="{{index}}"></image>
+                <image wx:else class="task-icon2" mode="heightFix" src="/images/finish.png" bindtap="tapCancel" data-item="{{item}}" data-index="{{index}}"></image>
                 <view class="task-rightPart" bindtap="tapTask" data-item="{{item}}">
                     <view>{{item.name}}</view>
                     <view class="task-rightPart-bottomRow  align-center">
@@ -19,7 +19,7 @@
                     </view>
                 </view>
             </view>
-            <view slot="right" class="taskRow-right center" bindtap="tapDeleteTask" id="{{item.id}}">
+            <view slot="right" class="taskRow-right center" bindtap="tapDeleteTask" id="{{item.id}}"  data-index="{{index}}" data-type="unfinished">
                 <image mode="heightFix" src="/images/list/listDetail/delete_row.png"></image>
             </view>
         </l-slide-view>
@@ -41,8 +41,8 @@
                 <view class="taskRow">
                     <l-slide-view height="120" width="690" slide-width="150" close="{{isCloseSlider}}">
                         <view slot="left" class="taskRow-left align-center">
-                            <image wx:if="{{!item.is_finished}}" class="task-icon" mode="heightFix" src="/images/list/listDetail/circle.png" bindtap="tapFinish" data-item="{{item}}"></image>
-                            <image wx:else class="task-icon2" mode="heightFix" src="/images/finish.png" bindtap="tapCancel" data-item="{{item}}"></image>
+                            <image wx:if="{{!item.is_finished}}" class="task-icon" mode="heightFix" src="/images/list/listDetail/circle.png" bindtap="tapFinish" data-item="{{item}}"  data-index="{{index}}"></image>
+                            <image wx:else class="task-icon2" mode="heightFix" src="/images/finish.png" bindtap="tapCancel" data-item="{{item}}"  data-index="{{index}}"></image>
                             <view class="task-rightPart" bindtap="tapTask" data-item="{{item}}">
                                 <view>{{item.name}}</view>
                                 <view class="task-rightPart-bottomRow  align-center">
@@ -55,7 +55,7 @@
                                 </view>
                             </view>
                         </view>
-                        <view slot="right" class="taskRow-right center" bindtap="tapDeleteTask" id="{{item.id}}">
+                        <view slot="right" class="taskRow-right center" bindtap="tapDeleteTask" id="{{item.id}}" data-index="{{index}}" data-type="finished">
                             <image mode="heightFix" src="/images/list/listDetail/delete_row.png"></image>
                         </view>
                     </l-slide-view>

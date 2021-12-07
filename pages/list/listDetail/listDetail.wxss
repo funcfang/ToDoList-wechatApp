@@ -36,26 +36,15 @@
   text-align: center;
 }
 .teamPop .teamPop-topRow {
+  justify-content: space-between;
   font-size: 36rpx;
   font-weight: bold;
   color: #2c2c2c;
   margin-bottom: 70rpx;
-  position: relative;
-  /* 设置相对定位 */
 }
-.teamPop .teamPop-topRow view {
-  /* 绝对定位，4 个方向设置为 0 后，margin 设为 auto */
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-}
-.teamPop .teamPop-topRow .teamPop-topRow-button {
-  position: absolute;
-  right: 50rpx;
-  margin: auto;
+.teamPop .teamPop-topRow .teamPop-topRow-information {
+  font-size: 20rpx;
+  text-align: left;
 }
 .teamPop .teamPop-topRow .teamPop-topRow-button view {
   width: 60rpx;

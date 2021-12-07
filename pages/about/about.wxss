@@ -1,1 +1,51 @@
-/* pages/about/about.wxss */
+page {
+  background-color: white;
+}
+.logoPart {
+  width: 100%;
+  height: 330rpx;
+}
+.logoPart image {
+  width: 250rpx;
+  height: 250rpx;
+}
+.logoPart view {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #2c2c2c;
+}
+.content {
+  margin: 30rpx 40rpx 0rpx 40rpx;
+  letter-spacing: 1rpx;
+  line-height: 2;
+  font-size: 28rpx;
+  color: #434343;
+}
+.content view {
+  font-size: 32rpx;
+  margin-bottom: -50rpx;
+  color: #141414;
+}
+.codeOpen {
+  margin: 30rpx 40rpx 0rpx 40rpx;
+}
+.codeOpen .codeOpen-title {
+  font-size: 32rpx;
+  color: #141414;
+  margin-bottom: 26rpx;
+}
+.codeOpen .codeOpen-bottom .codeOpen-part {
+  margin-right: 40rpx;
+  font-size: 28rpx;
+  color: #434343;
+}
+.codeOpen .codeOpen-bottom .codeOpen-part .icon {
+  height: 38rpx;
+  width: 38rpx;
+  margin-right: 10rpx;
+}
+.footer {
+  margin-top: 80rpx;
+  color: #666666;
+  font-size: 26rpx;
+}

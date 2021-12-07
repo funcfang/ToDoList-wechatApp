@@ -53,6 +53,12 @@
                     "pathName": "pages/allTaskList/allTaskList",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "about",
+                    "pathName": "pages/about/about",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

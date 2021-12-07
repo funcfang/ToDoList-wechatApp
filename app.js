@@ -1,7 +1,17 @@
 import {user_api} from './api/common/index'
-
+const util = require('./utils/util')
 App({
   onLaunch() {
+    util.isFullScreen().then(e => {
+      if (e) {
+          that.setData({
+              isFullScreen: true
+          })
+          getApp().globalData.isFullScreen = true
+          wx.setStorageSync('isFullScreen', isFullScreen)
+      }
+  })
+
     wx.login({
       success: res => {
           if (res.code) {
@@ -9,7 +19,7 @@ App({
                   "code": res.code
               }).then(e => {
                   // 害，早知道后端初始化用户得了
-                  console.log("hello")
+                  // console.log("hello")
                   e.user.username = e.user.username === "" ? "💻" : e.user.username
                   e.user.avatar = e.user.avatar === "" ? "/images/mine/avatar.png" : getApp().globalData.API_FILE + e.user.avatar
                   wx.setStorageSync('user', e.user)

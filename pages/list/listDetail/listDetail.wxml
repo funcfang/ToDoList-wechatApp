@@ -7,15 +7,15 @@
 </view>
 
 
-<taskList unfinishedTasks="{{unfinishedTasks}}" finishedTasks="{{finishedTasks}}"  api="{{Task_api}}" setting="{{setting}}" bindgetTaskList="getTaskList"></taskList>
+<taskList unfinishedTasks="{{unfinishedTasks}}" finishedTasks="{{finishedTasks}}" api="{{Task_api}}" setting="{{setting}}" bindgetTaskList="getTaskList"></taskList>
 
 <!-- 小组弹出窗 -->
 <l-popup show="{{isShowTeamPop}}" content-align="center" bind:lintap="tapBackground">
     <view class="teamPop">
-        <view class="teamPop-topRow">
-            <view style="display: block;">
-                <span>小组ID{{list.id}}</span>
-                <span>创建人ID{{list.user_id}}</span>
+        <view class="teamPop-topRow align-center">
+            <view class="teamPop-topRow-information">
+                <view>小组ID:{{list.id}}</view>
+                <view>创建人ID:{{list.user_id}}</view>
             </view>
             <view>小组成员</view>
             <l-button wx:if="{{list.user_id===user.id}}" special="{{true}}" open-type="share" class="teamPop-topRow-button">
