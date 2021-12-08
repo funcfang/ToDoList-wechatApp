@@ -1,0 +1,9 @@
+{
+  "ignore": [
+    "miniprogram_npm",
+    "node_modules"
+  ],
+  "source_root": "",
+  "filters": [],
+  "lines_to_extract": 3000
+}
