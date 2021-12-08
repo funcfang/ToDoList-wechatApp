@@ -32,7 +32,7 @@
 
 ### 2.部分页面
 
-<img src="https://gitee.com/wx_a1fae56917/images/raw/master/TyporaImages/image-20211208133518702.png" alt="image-20211208133518702" style="zoom:20%;" /><img src="https://gitee.com/wx_a1fae56917/images/raw/master/TyporaImages/image-20211208134010080.png" alt="image-20211208134010080" style="zoom:20%;" /><img src="https://gitee.com/wx_a1fae56917/images/raw/master/TyporaImages/image-20211208134025821.png" alt="image-20211208134025821" style="zoom:20%;" /><img src="https://gitee.com/wx_a1fae56917/images/raw/master/TyporaImages/image-20211208134119726.png" alt="image-20211208134119726" style="zoom:20%;" />
+![image-20211208140806922](https://gitee.com/wx_a1fae56917/images/raw/master/TyporaImages/image-20211208140806922.png)
 
 ### 3.组件
 
