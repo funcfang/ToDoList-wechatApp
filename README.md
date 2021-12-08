@@ -2,9 +2,11 @@
 
 ### 1.小程序体验码
 
-<img src="C:\Users\HP\Desktop\project\ToDo任务清单\images\image-20211208133404456.png" alt="image-20211208133404456"  />
+<img src="https://gitee.com/wx_a1fae56917/images/raw/master/TyporaImages/image-20211208133404456.png" alt="image-20211208133404456"  />
 
-后端地址：[ToDoList_Server](https://github.com/fangfang1122/ToDoList_Server)
+**后端地址：[ToDoList_Server](https://github.com/fangfang1122/ToDoList_Server)**
+
+**希望我的开发思路能对你有一定的帮助。**
 
 #### 实现功能：
 
@@ -30,5 +32,12 @@
 
 ### 2.部分页面
 
-<img src="C:\Users\HP\Desktop\project\ToDo任务清单\images\image-20211208133518702.png" alt="image-20211208133518702" style="zoom:20%;" /><img src="C:\Users\HP\Desktop\project\ToDo任务清单\images\image-20211208134010080.png" alt="image-20211208134010080" style="zoom:20%;" /><img src="C:\Users\HP\Desktop\project\ToDo任务清单\images\image-20211208134025821.png" alt="image-20211208134025821" style="zoom:20%;" /><img src="C:\Users\HP\Desktop\project\ToDo任务清单\images\image-20211208134119726.png" alt="image-20211208134119726" style="zoom:20%;" />
+<img src="https://gitee.com/wx_a1fae56917/images/raw/master/TyporaImages/image-20211208133518702.png" alt="image-20211208133518702" style="zoom:20%;" /><img src="https://gitee.com/wx_a1fae56917/images/raw/master/TyporaImages/image-20211208134010080.png" alt="image-20211208134010080" style="zoom:20%;" /><img src="https://gitee.com/wx_a1fae56917/images/raw/master/TyporaImages/image-20211208134025821.png" alt="image-20211208134025821" style="zoom:20%;" /><img src="https://gitee.com/wx_a1fae56917/images/raw/master/TyporaImages/image-20211208134119726.png" alt="image-20211208134119726" style="zoom:20%;" />
+
+### 3.组件
+
+使用到的组件：
+
+1. [LinUI](https://doc.mini.talelin.com/start/)
+2. [小历同学](https://treadpit.github.io/wx_calendar/)
 
