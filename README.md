@@ -1,4 +1,4 @@
-# 微信小程序-ToDo任务清单
+# ToDo任务清单-后端Go
 
 ## 1.小程序体验码
 
@@ -40,4 +40,52 @@
 
 1. [LinUI](https://doc.mini.talelin.com/start/)
 2. [小历同学](https://treadpit.github.io/wx_calendar/)
+
+### 4.整体架构
+
+```
+-- api 页面封装的请求
+-- component 组件
+custom-tab-bar 自定义Tabbar栏
+-- miniprogram_npm 引用组件
+-- pages
+    -- about 关于
+    -- allTaskList 全部事项
+    -- index 首页
+    -- information 编辑信息
+    -- list 清单
+    	-- listDetail 清单详情
+    -- mine 我的
+    -- setting 设置
+    -- task 任务页面
+-- resource 静态资源/icon 存放区
+-- utils 工具函数
+app.js
+app.json 
+app.wxss 全局样式
+```
+
+### 5.（打算）遵循原则
+
+（经验不足，按自己习惯写的，下次版本增加遵循原则，[参考](https://github.com/MrXujiang/openCoder/tree/master/webapp)）
+
+> 1.最小化组件拆分
+
+> 2.单一职责模式
+
+> 3.多用函数式编程方式 map, filter, reduce, some, any, forEach, every
+
+> 4.页面文件不超过300行，超过考虑拆分组件
+
+> 5.命名规范
+
+```
+1.css 使用BEM命名规范  https://zhuanlan.zhihu.com/p/72631379
+
+2.js 驼峰式命名  
+
+3.组件 大驼峰命名  
+
+4.文件和文件夹 驼峰式命名
+```
 
