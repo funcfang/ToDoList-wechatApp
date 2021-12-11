@@ -1,4 +1,4 @@
-# ToDo任务清单-后端Go
+# ToDo任务清单-小程序
 
 ## 1.小程序体验码
 
@@ -67,7 +67,7 @@ app.wxss 全局样式
 
 ### 5.（打算）遵循原则
 
-（经验不足，按自己习惯写的，下次版本增加遵循原则，[参考](https://github.com/MrXujiang/openCoder/tree/master/webapp)）
+（经验不足，开发时按自己习惯写的，下次版本增加遵循原则，[参考](https://github.com/MrXujiang/openCoder/tree/master/webapp)）
 
 > 1.最小化组件拆分
 
