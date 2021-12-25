@@ -20,11 +20,15 @@ page {
   line-height: 2;
   font-size: 28rpx;
   color: #434343;
+  text-align: justify;
 }
 .content view {
   font-size: 32rpx;
   margin-bottom: -50rpx;
   color: #141414;
+}
+.content .text-through {
+  text-decoration: line-through;
 }
 .codeOpen {
   margin: 30rpx 40rpx 0rpx 40rpx;

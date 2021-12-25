@@ -1,5 +1,5 @@
-const API_BASE_URL = 'https://funcfang.cn/api' // 主域名
-const API_UPLOAD_URL = 'https://funcfang.cn/' // 主域名文件 ，这边改了app.js记得也改
+const API_BASE_URL = 'https://todotask.cn/api' // 主域名
+const API_UPLOAD_URL = 'https://todotask.cn/' // 主域名文件 ，这边改了app.js记得也改
 import {
     showModalErrorAndMsg,
     showToast,

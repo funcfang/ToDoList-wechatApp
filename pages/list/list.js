@@ -143,7 +143,6 @@ Page({
         this.navigatetoDetail(e)
     },
 
-
     tapPopCancel() {
         let popShow = this.data.popShow
         popShow.isShowCreatePop = false
