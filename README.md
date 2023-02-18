@@ -2,7 +2,7 @@
 
 ## 1.小程序体验码
 
-<img src="https://gitee.com/wx_a1fae56917/images/raw/master/TyporaImages/image-20211208133404456.png" alt="image-20211208133404456"  />
+<img src="https://oss.funcfang.cn/images/todo_icon.png" alt="todo_icon"  />
 
 **后端地址：[ToDoList_Server](https://github.com/fangfang1122/ToDoList_Server)**
 
@@ -33,8 +33,7 @@
 ​	没想到会有人来使用这个小程序，由于最近忙于期末和科研项目，可能有些问题没时间修复，等我寒假有空吧~（2021.12.25）
 
 ## 2.部分页面
-
-![image-20211208140806922](https://gitee.com/wx_a1fae56917/images/raw/master/TyporaImages/image-20211208140806922.png)
+<img src="https://oss.funcfang.cn/images/todo.png" alt="todo"  />
 
 ## 3.组件
 
