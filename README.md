@@ -45,26 +45,25 @@
 ### 4.整体架构
 
 ```
--- api 页面封装的请求
--- component 组件
-custom-tab-bar 自定义Tabbar栏
--- miniprogram_npm 引用组件
--- pages
-    -- about 关于
-    -- allTaskList 全部事项
-    -- index 首页
-    -- information 编辑信息
-    -- list 清单
-    	-- listDetail 清单详情
-    -- mine 我的
-    -- setting 设置
-    -- task 任务页面
--- images icon 存放区
--- resource 静态资源，完成音效MP3
--- utils 工具函数
-app.js
-app.json 
-app.wxss 全局样式
+├── api 页面封装的请求
+├── component 组件
+├── custom-tab-bar 自定义Tabbar栏
+├── miniprogram_npm 引用组件
+├── pages
+│    └── about 关于
+│    └── allTaskList 全部事项
+│    └── index 首页
+│    └── information 编辑信息
+│    └── list 清单
+│    │    └── listDetail 清单详情
+│    └── mine 我的
+│    └── setting 设置
+│    └── task 任务页面
+├── images icon 存放区
+├── resource 静态资源，完成音效MP3
+├── app.js
+├── app.json 
+├── app.wxss 全局样式
 ```
 
 ### 5.（打算）遵循原则
