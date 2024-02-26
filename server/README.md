@@ -4,7 +4,7 @@
 
 ## 1.小程序体验码
 
-<img src="https://gitee.com/wx_a1fae56917/images/raw/master/TyporaImages/image-20211208133404456.png" alt="image-20211208133404456"  />
+<img src="https://oss.funcfang.cn/images/2024/02/26/20240226183259-bd.png" alt="image-20211208133404456"  />
 
 **前端小程序地址：[ToDoList-wechatApp](https://github.com/fangfang1122/ToDoList-wechatApp)**
 
@@ -34,7 +34,7 @@ ToDo 为我今年愿单之一，想自己学习且独立写一个前后端的软
 
 ## 2.部分页面
 
-![image-20211208140806922](https://gitee.com/wx_a1fae56917/images/raw/master/TyporaImages/image-20211208140806922.png)
+![image-20211208140806922](https://oss.funcfang.cn/images/2024/02/26/20240226183259-f3.png)
 
 ## 3.整体架构
 
