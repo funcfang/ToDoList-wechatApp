@@ -4,11 +4,9 @@
 
 ### 代码
 
-APP 原生微信小程序语言开发，代码入口：
+APP 原生微信小程序语言开发，入口：[APP](https://github.com/funcfang/ToDoList-wechatApp/tree/main/app)
 
-SERVER 端 Go 语言编写，代码入口：
-
-
+SERVER 端 Go 语言编写，入口：[SERVER](https://github.com/funcfang/ToDoList-wechatApp/tree/main/server)
 
 ### 实现功能：
 
